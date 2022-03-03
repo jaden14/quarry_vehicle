@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ConveyanceController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +24,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth'])->group(function () {
+
+    /**
+     * Conveyance Route
+     */
+    Route::resource('/conveyance', ConveyanceController::class)->except([
+        'create', 'show'
+    ]);
+
+});

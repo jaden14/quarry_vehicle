@@ -8,3 +8,12 @@ To install:
 4. php artisan key:generate
 5. php artisan migrate
 6. php artisan db:seed <-this will add user admin@admin.com/12345678
+
+
+# CRUD: Conveyance
+To access the **Conveyance** page you may visit **/conveyance** url path. 
+
+e.g
+```php
+127.0.0.1:8000/conveyance
+```

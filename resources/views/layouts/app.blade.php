@@ -17,34 +17,30 @@
     <link rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
 
 </head>
-<body>
+<body class="app" cz-shortcut-listen="true">
     <div id="app">
-         <header class="app-header fixed-top">
+        <header class="app-header fixed-top">
             @include('layouts.components.navbar')
             @include('layouts.components.sidebar')
         </header>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-
-    <div class="app-wrapper">
-        <div class="app-content pt-3 p-md-3 p-lg-4" >
+        <div class="app-wrapper">
+            <div class="app-content pt-3 p-md-3 p-lg-4" >
+                @yield('content')
+                <!--//container-fluid-->
+            </div>
             @include('layouts.components.footer')
-            <!--//container-fluid-->
         </div>
-        <footer></footer>
-    </div>
     </div>
     <script src="{{ asset('assets/plugins/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>  
+    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- Charts JS -->
-    <script src="{{ asset('assets/plugins/chart.js/chart.min.js') }}"></script> 
-    <script src="{{ asset('assets/js/index-charts.js') }}"></script> 
-    
+    <script src="{{ asset('assets/plugins/chart.js/chart.min.js') }}"></script>
+    <script src="{{ asset('assets/js/index-charts.js') }}"></script>
+
     <!-- Page Specific JS -->
-    <script src="{{ asset('assets/js/app.js') }}"></script> 
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 
 </body>
 </html>
