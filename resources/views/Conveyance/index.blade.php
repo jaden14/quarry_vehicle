@@ -46,21 +46,21 @@
                                         <td class="cell">{{ $conveyance->id }}</td>
                                         <td class="cell"><span class="truncate">{{ $conveyance->description }}</span></td>
                                         <td class="cell">
-                                            <a class="btn-sm app-btn-secondary m-2" href="{{ route('conveyance.edit', $conveyance) }}">Edit</a>
+                                            <form id="conveyance-delete" action="{{ route('conveyance.destroy', $conveyance) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <a class="btn-sm app-btn-secondary" href="{{ route('conveyance.destroy', $conveyance) }}" onclick="event.preventDefault();document.getElementById('conveyance-delete').submit();">Delete</a>
+                                                <a class="btn-sm app-btn-secondary m-2" href="{{ route('conveyance.edit', $conveyance) }}">Edit</a>
+
+                                                <button class="btn-sm app-btn-secondary" type="submit">Delete</button>
+                                            </form>
+                                @empty
                                         </td>
                                     </tr>
-                                @empty
                                     <tr>
                                         <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
                                     </tr>
                                 @endforelse
-
-                                <form id="conveyance-delete" action="{{ route('conveyance.destroy', $conveyance) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
                             </tbody>
                         </table>
                     </div><!--//table-responsive-->
