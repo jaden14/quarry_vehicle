@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Violation Type Route
      */
-    Route::resource('/violationtype', ViolationTypeController::class)->except([
+    Route::resource('/violation', ViolationTypeController::class)->except([
         'create', 'show'
     ]);
 

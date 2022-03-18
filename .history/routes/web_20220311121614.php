@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ConveyanceController;
-use App\Http\Controllers\ViolationTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +32,6 @@ Route::middleware(['auth'])->group(function () {
      * Conveyance Route
      */
     Route::resource('/conveyance', ConveyanceController::class)->except([
-        'create', 'show'
-    ]);
-    /**
-     * Violation Type Route
-     */
-    Route::resource('/violationtype', ViolationTypeController::class)->except([
         'create', 'show'
     ]);
 
