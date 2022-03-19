@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
      * Conveyance Route
      */
     Route::resource('/conveyance', ConveyanceController::class)->except([
-        'create', 'show'
+        'create', 'show', 'edit'
     ]);
 
 });
