@@ -74,16 +74,25 @@
 
                                                 {{-- <a class="btn-sm app-btn-secondary m-2" href="{{ route('violationtype.edit', $violationtype) }}">Edit</a> --}}
 
-                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#editViolationType{{"+".$violationtype->id }}">
+                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#editViolationType">
                                                     Update
                                                 </button>
                                                 
                                                 <button class="btn-sm app-btn-secondary" type="submit">Delete</button>
 
                                             </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
+                                    </tr>
+                                @endforelse
+
+                                
 
                                             <!-- Edit Violatin Type Modal -->
-                                            <div class="modal fade" id="editViolationType{{"+".$violationtype->id }}" tabindex="-1" role="dialog" aria-labelledby="editViolationType" aria-hidden="true">
+                                            <div class="modal fade" id="editViolationType" tabindex="-1" role="dialog" aria-labelledby="editViolationType" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         
@@ -112,14 +121,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
-                                    </tr>
-                                @endforelse
                             </tbody>
                         </table>
                     </div><!--//table-responsive-->

@@ -15,7 +15,6 @@
     <!-- App CSS -->
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
-    
 
 </head>
 <body class="app" cz-shortcut-listen="true">

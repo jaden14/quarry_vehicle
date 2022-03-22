@@ -83,7 +83,7 @@
                                             </form>
 
                                             <!-- Edit Violatin Type Modal -->
-                                            <div class="modal fade" id="editViolationType{{"+".$violationtype->id }}" tabindex="-1" role="dialog" aria-labelledby="editViolationType" aria-hidden="true">
+                                            <div class="modal fade" id="editViolationType" tabindex="-1" role="dialog" aria-labelledby="editViolationType" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         
