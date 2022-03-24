@@ -28,3 +28,13 @@ e.g
 ```php
 127.0.0.1:8000/violationtype
 ```
+
+# CRUD: Quarry
+
+To access the **Quarry** page you may visit **/quarry** url path.
+
+e.g
+
+```php
+127.0.0.1:8000/quarry
+```
