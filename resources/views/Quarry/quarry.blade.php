@@ -211,8 +211,6 @@
                         </div>
                     </div>
                 </div>
-               
-                <!-- DIRIA IMONG UI DREW -->
 
             </div>
 
@@ -260,9 +258,7 @@
 
                 </div>
             </div>
-            <!-- <nav class="app-pagination">
-                {{--  {!! $conveyances->links() !!}  --}}
-            </nav>//app-pagination -->
+
 
         </div>
     </div>
