@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ConveyanceController;
+use App\Http\Controllers\QuarryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,10 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
 });
+
+
+Route::view('quarry', 'Quarry/quarry');
+Route::post('quarry', [QuarryController::class,'addData']);
+Route::get('quarry', [QuarryController::class,'dataList']);
+Route::get('delete/{id}', [QuarryController::class,'deleteData']);
+Route::put('edit/{id}', [QuarryController::class,'updateData']);
