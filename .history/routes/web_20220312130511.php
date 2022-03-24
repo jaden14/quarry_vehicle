@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ConveyanceController;
-use App\Http\Controllers\ViolationTypeController;
-use App\Http\Controllers\QuarryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,20 +32,13 @@ Route::middleware(['auth'])->group(function () {
      * Conveyance Route
      */
     Route::resource('/conveyance', ConveyanceController::class)->except([
-        'create', 'show', 'edit'
+        'create', 'show'
     ]);
     /**
      * Violation Type Route
      */
-    Route::resource('/violationtype', ViolationTypeController::class)->except([
+    Route::resource('/violation', ConveyanceController::class)->except([
         'create', 'show'
     ]);
 
 });
-
-
-Route::view('quarry', 'Quarry/quarry');
-Route::post('quarry', [QuarryController::class,'addData']);
-Route::get('quarry', [QuarryController::class,'dataList']);
-Route::get('delete/{id}', [QuarryController::class,'deleteData']);
-Route::put('edit/{id}', [QuarryController::class,'updateData']);

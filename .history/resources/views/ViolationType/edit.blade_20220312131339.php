@@ -5,7 +5,7 @@
 
     <div class="row g-3 mb-4 align-items-center justify-content-between">
         <div class="col-auto">
-            <h1 class="app-page-title mb-0">Conveyance - Edit</h1>
+            <h1 class="app-page-title mb-0">ViolationType - Edit</h1>
         </div>
     </div><!--//row-->
 
@@ -16,13 +16,13 @@
                 <div class="app-card-body">
                     <div class="app-card app-card-settings shadow-sm p-4">
                         <div class="app-card-body">
-                            <form class="settings-form" method="POST" action="{{ route('conveyance.update', $conveyance) }}">
+                            <form class="settings-form" method="POST" action="{{ route('violation.update', $violation) }}">
                                 @csrf
                                 @method('PATCH')
 
                                 <div class="mb-3">
                                     <label for="setting-input-3" class="form-label">Description</label>
-                                    <input type="text" class="form-control" name="description" value="{{ $conveyance->description }}">
+                                    <input type="text" class="form-control" name="description" value="{{ $violation->description }}">
                                 </div>
                                 <button type="submit" class="btn app-btn-primary">Save Changes</button>
                             </form>

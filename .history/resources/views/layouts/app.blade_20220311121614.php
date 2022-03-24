@@ -12,13 +12,9 @@
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <!-- App CSS -->
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
-    
 
 </head>
 <body class="app" cz-shortcut-listen="true">
@@ -45,6 +41,6 @@
 
     <!-- Page Specific JS -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    @yield('scripts')
+
 </body>
 </html>

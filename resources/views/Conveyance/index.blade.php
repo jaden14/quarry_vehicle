@@ -10,22 +10,24 @@
         <div class="col-auto">
             <div class="page-utilities">
                 <div class="col-auto">
-                        <form class="table-search-form row gx-1 align-items-center" action="{{ route('conveyance.store') }}" method="POST">
+                        {{--  <form class="table-search-form row gx-1 align-items-center" action="{{ route('conveyance.store') }}" method="POST">
                             @csrf
 
                             <div class="col-auto">
                                 <input type="text" name="description" class="form-control search-orders">
-                            </div>
+                            </div>  --}}
                             <div class="col-auto">
-                                <button type="submit" class="btn app-btn-secondary">Add</button>
+                                <button type="button" class="btn app-btn-secondary" data-toggle="modal" data-target="#createConveyance">Create</button>
                             </div>
-                        </form>
+                            {{--  <div class="col-auto">
+                                <button type="button" class="btn app-btn-secondary" data-toggle="modal" data-target="#editConveyance">Edit</button>
+                            </div>  --}}
+                        {{--  </form>  --}}
 
                     </div><!--//col-->
             </div><!--//table-utilities-->
         </div><!--//col-auto-->
     </div><!--//row-->
-
 
     <div class="tab-content" id="orders-table-tab-content">
         <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -41,22 +43,52 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($conveyances as $conveyance)
+                                @forelse($conveyances as $key => $conveyance)
                                     <tr>
-                                        <td class="cell">{{ $conveyance->id }}</td>
+                                        <td class="cell">{{ $key+1 }}</td>
                                         <td class="cell"><span class="truncate">{{ $conveyance->description }}</span></td>
                                         <td class="cell">
                                             <form id="conveyance-delete" action="{{ route('conveyance.destroy', $conveyance) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <a class="btn-sm app-btn-secondary m-2" href="{{ route('conveyance.edit', $conveyance) }}">Edit</a>
+                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#editConveyance=?{{ $conveyance->id }}">Update</button>
+
+                                                {{--  <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#deleteConveyance">Delete Modal</button>  --}}
 
                                                 <button class="btn-sm app-btn-secondary" type="submit">Delete</button>
                                             </form>
-                                @empty
                                         </td>
                                     </tr>
+
+                                    <!-- Conveyance Edit Modal -->
+                                    <div class="modal fade" id="editConveyance=?{{ $conveyance->id }}" tabindex="-1" role="dialog" aria-labelledby="editConveyanceLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editConveyanceLabel">Update</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <!-- Modal -->
+                                                <form class="table-search-form row gx-1 align-items-center" action="{{ route('conveyance.update', $conveyance) }}" method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+
+                                                    <div class="modal-body">
+                                                        <input type="text" name="description" value="{{ $conveyance->description }}" class="form-control search-orders">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary text-white">Save</button>
+                                                    </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @empty
                                     <tr>
                                         <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
                                     </tr>
@@ -73,5 +105,8 @@
 
         </div><!--//tab-pane-->
     </div><!--//tab-content-->
+
+    @include('Conveyance.modal')
+
 </div>
 @endsection
