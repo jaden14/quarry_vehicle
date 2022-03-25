@@ -42,4 +42,6 @@ Route::middleware(['auth'])->group(function () {
         'create', 'show'
     ]);
 
+    Route::resource('/subquarry', SubquarryController::class);
+
 });
