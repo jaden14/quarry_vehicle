@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Subquarry;
+
 use Illuminate\Http\Request;
 
 class SubquarryController extends Controller
@@ -14,10 +14,8 @@ class SubquarryController extends Controller
      */
     public function index()
     {
-        $subquarries = Subquarry::select('name', 'requirements');
-
-        return view('subquarry.index',compact('subquarries'));
-        
+        $subquarries = Subquarry::all();
+        return view('quarry', [ "subquarries" => $subquarries ]);
     }
 
     /**
@@ -27,7 +25,7 @@ class SubquarryController extends Controller
      */
     public function create()
     {
-        //return view('subquarry.create');
+        return view('quarry');
     }
 
     /**
@@ -40,64 +38,53 @@ class SubquarryController extends Controller
     {
         $input = $request->all();
         $input['requirements'] = $request->input('requirements');
-        Post::create($input);
-        return redirect()->route('subquarry.index');
+        Subquarry::create($input);
+        return redirect()->route('quarry');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Subquarry  $subquarry
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Subquarry $subquarry)
+    public function show($id)
     {
-        // return view('subquarry.show',compact('subquarry'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Subquarry  $subquarry
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subquarry $subquarry)
+    public function edit($id)
     {
-        return view('subquarry.index',compact('subquarry'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subquarry  $subquarry
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subquarry $subquarry)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'requirements' => 'required',
-            
-        ]);
-    
-        $subquarry->update($request->all());
-    
-        return redirect()->route('subquarry.index')
-                        ->with('success','Subquarry updated successfully');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Subquarry  $subquarry
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subquarry $subquarry)
+    public function destroy($id)
     {
-        $subquarry->delete();
-    
-        return redirect()->route('subquarry.index');
-                       
+        //
     }
 }

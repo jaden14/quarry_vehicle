@@ -7,18 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subquarry extends Model
 {
-    use HasFactory;
+    protected $fillable = ['requirements'];
 
-    protected $fillable = [
-        'name','requirements',
-    ];
-    
-    public function setrequirementsAttribute($value)
+    public function setCategoryAttribute($value)
     {
         $this->attributes['requirements'] = json_encode($value);
     }
 
-    public function getrequirementsAttribute($value)
+    public function getCategoryAttribute($value)
     {
         return $this->attributes['requirements'] = json_decode($value);
     }
