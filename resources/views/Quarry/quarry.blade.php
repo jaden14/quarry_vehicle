@@ -3,25 +3,6 @@
 @section('content')
 <div class="container-xl">
 
-    @if(session('name'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">Added successfully!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
-    @if(session('delete'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">Deleted successfully!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    <!-- <div class="toast align-items-center text-white bg-primary border-0 bottom-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">Deleted successfully!</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div> -->
-    @endif
-
     <!-- Button trigger modal -->
     <button type="button" class="btn-sm app-btn-secondary px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add</button>
 
@@ -29,13 +10,20 @@
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Quarry</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            <div class="d-flex justify-content-between">
+                <ul class="nav nav-tabs mt-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Quarry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sub Quarry</a>
+                    </li>
+                </ul>
 
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
         <div class="modal-body">
-
             <form action="quarry" method="POST">
                 @csrf
             <div class="row g-2">
@@ -125,9 +113,9 @@
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <select class="form-select" id="municipality" name="municipality">
-                                            <option value="One">One</option>
-                                            <option value="Two">Two</option>
-                                            <option value="Three">Three</option>
+                                            @foreach($municipalities as $municipality)
+                                            <option value="{{$municipality['id']}}">{{$municipality->munname}}</option>
+                                            @endforeach
                                         </select>
                                         <label for="municipality">Municipality</label>
                                     </div>
@@ -217,10 +205,11 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary text-white" id="btnShow">Submit</button>
+            <button type="submit" class="btn btn-primary text-white" id="submitBtn">Submit</button>
         </div>
         
         </form>
+        
 
         
 
@@ -239,16 +228,23 @@
                                 <tr>
                                     <th class="cell">Control No.</th>
                                     <th class="cell">Name</th>
+                                    <th class="cell">Municipality</th>
+                                    <th class="cell">Date Applied</th>
+                                    <th class="cell">Status</th>
                                     <th class="cell">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     @foreach($quarries as $quarry)
                                     <tr>
+                                        <input type="hidden" class="delete-id" value="{{$quarry['id']}}">
                                         <td class="cell">{{$quarry->control_number}}</td>
                                         <td class="cell">{{$quarry->name}}</td>
+                                        <td class="cell">{{$quarry->municipality}}</td>
+                                        <td class="cell">{{$quarry->date_applied}}</td>
+                                        <td class="cell">{{$quarry->status}}</td>
                                         <td class="cell"><a id="editForm" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit" data-quarry-info="{{$quarry}}">Edit</a>
-                                        <a class="btn-sm app-btn-secondary" href="delete/{{$quarry['id']}}">Delete</a>
+                                        <button class="btn-sm app-btn-secondary deletebutton" id="{{$quarry['id']}}">Delete</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -474,14 +470,12 @@
     </div>
     
     
-
-    
-    
-
 @endsection
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/assets/js/quarry.js"></script>
+<script src="/assets/js/deleteConfirmation.js"></script>
+<script src="/assets/js/quarry-toast.js"></script>
 @endsection

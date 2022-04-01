@@ -49,5 +49,5 @@ Route::middleware(['auth'])->group(function () {
 Route::view('quarry', 'Quarry/quarry');
 Route::post('quarry', [QuarryController::class,'addData']);
 Route::get('quarry', [QuarryController::class,'dataList']);
-Route::get('delete/{id}', [QuarryController::class,'deleteData']);
+Route::delete('delete/{id}', [QuarryController::class,'deleteData']);
 Route::put('edit/{id}', [QuarryController::class,'updateData']);

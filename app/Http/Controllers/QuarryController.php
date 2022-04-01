@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quarry;
+use App\Models\Municipality;
 use Session;
+
 
 class QuarryController extends Controller
 {
@@ -31,27 +33,29 @@ class QuarryController extends Controller
         $data->remarks=$req->remarks;
         $data->save();
 
-        $req->session()->flash('name');
+        $req->session()->flash('name', 'Data added successfully!');
         return redirect('quarry');
 
     }
 
     function dataList(){
         $data = Quarry::all();
-        return view('Quarry/quarry', ['quarries'=>$data]);
+        $mun = Municipality::all();
+        // return view('/home', compact('articles', 'categories'));
+        return view('Quarry/quarry', ['quarries'=>$data, 'municipalities'=>$mun]);
     }
 
     function deleteData($id){
         $data = Quarry::find($id);
         $data->delete();
-        session()->flash('delete');
-        return redirect('quarry');
+        return true;
     }
 
     function showData($id){
         $data = Quarry::find($id);
         return view('Quarry/quarry', ['data'=>$data]);
     }
+
 
     function updateData(Request $req, $id){
         
