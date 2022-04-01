@@ -209,13 +209,13 @@
         </div>
         
         </form>
-        
+                
+            </div>
 
-        
-
     </div>
     </div>
     </div>
+    
 
     <!-- Table -->
     <div class="tab-content mt-3" id="orders-table-tab-content">
@@ -249,7 +249,7 @@
                                     </tr>
                                     @endforeach
                             </tbody>
-                        </table>
+                
                     </div>
 
                 </div>

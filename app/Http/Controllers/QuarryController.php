@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Quarry;
 use App\Models\Municipality;
+
 use Session;
 
 
 class QuarryController extends Controller
 {
     function addData(Request $req){
-        
         $data = new Quarry;
+       
         $data->quarry_type=$req->quarryTypes;
         $data->control_number=$req->controlNum;
         $data->name=$req->name;
@@ -34,6 +35,42 @@ class QuarryController extends Controller
         $data->save();
 
         $req->session()->flash('name', 'Data added successfully!');
+
+       /* $subquarries - [
+            'ApplicationLettersub' => $req -> ApplicationfromNOT,
+            'ApplicationfromNOTsub' => $req -> ApplicationLetter,
+           'SurelyBondsub' => $req -> SurelyBond,
+           'SketchedMapsub' => $req -> SketchedMap,
+           'PhotocopyRegistrationofEquipmentsub' => $req -> PhotocopyRegistrationofEquipment,
+           'Copyoregistriesaritclesofpartnershipsub' => $req ->Copyoregistriesaritclesofpartnership,
+           'CertcopyPowerofAttorneysub' =>$req ->CertcopyPowerofAttorney ,
+           'ISAGApplicationsub' => $req -> ISAGApplication,
+           'Proofofowenershipsub' => $req -> Proofofowenership,
+           'CertificationAreaClearancesub' => $req -> CertificationAreaClearance,
+           'DPWHsub' =>$req -> DPHW,
+           'PEOsub' => $req -> PEO,
+           'NIAsub' => $req -> NIA,
+           'DENRsub' => $req -> DENR,
+           'BarangayResolutionInterposingNoObjectionsub' =>$req -> BarangayResolutionInterposingNoObjection,
+           'SBResolutionInterposingNoObjectionsub' => $req -> SBResolutionInterposingNoObjection,
+           'InspectionPenrosub' => $req -> InspectionPenro,
+           'TransmittalLettersub' => $req ->TransmittalLetter,
+           'NotarizedChecklissub' => $req ->NotarizedChecklis,
+           'EnvironmentalCompliancesub' => $req -> EnvironmentalCompliance,
+           'ProofsEvidencesregisteredwithagenciessub' => $req -> ProofsEvidencesregisteredwithagencies,
+           'BusinessPermitsub' => $req -> BusinessPermit,
+           'NoticeofPostingCertificationsub' => $req -> NoticeofPostingCertification ,
+           'CSAGCEFPsub' => $req -> CSAGCEFP,
+           'Seedlingssub' => $req -> Seedlings,
+           'Paymentssub' => $req -> Payments,
+           
+
+        ];
+        
+
+        Subquarry::table('subquarries')->insert($subquarries);
+        */
+        $req->session()->flash('name');
         return redirect('quarry');
 
     }

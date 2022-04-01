@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConveyanceController;
 use App\Http\Controllers\ViolationTypeController;
 use App\Http\Controllers\QuarryController;
+use App\Http\Controllers\SubquarryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +44,11 @@ Route::middleware(['auth'])->group(function () {
         'create', 'show'
     ]);
 
+    
+
 });
 
-
+Route::resource('/subquarries', SubquarryController::class);
 Route::view('quarry', 'Quarry/quarry');
 Route::post('quarry', [QuarryController::class,'addData']);
 Route::get('quarry', [QuarryController::class,'dataList']);
