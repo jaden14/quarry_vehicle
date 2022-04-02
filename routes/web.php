@@ -30,7 +30,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::middleware(['auth'])->group(function () {
-
+    /**
+     * Vehicle Violation Route
+     */
+    Route::resource('/vehicleviolation', VehicleViolationController::class)->except([
+        'create', 'show', 'edit'
+    ]);
     /**
      * Conveyance Route
      */
