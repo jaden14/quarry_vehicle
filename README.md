@@ -6,7 +6,7 @@ To install:
 2. npm install
 3. copy .env.example .env <- setup your database and config the .env
 4. php artisan key:generate
-5. php artisan migrate
+5. php artisan migrateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 6. php artisan db:seed <-this will add user admin@admin.com/12345678
 
 # CRUD: Conveyance
