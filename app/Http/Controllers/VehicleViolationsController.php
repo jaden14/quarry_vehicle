@@ -15,6 +15,11 @@ class VehicleViolationsController extends Controller
      */
     public function index()
     {
+        
         return view('vehicleviolations.index');
+    }
+    public function create()
+    {
+        
     }
 }

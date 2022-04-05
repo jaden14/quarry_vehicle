@@ -106,6 +106,6 @@ class ViolationTypeController extends Controller
         $violationtype->delete();
 
         // return to_route('conveyance.index');
-        return redirect()->route('violationtype.index');
+        return redirect()->route('violationtype.index')->withSuccess('Deleted Successfully!');
     }
 }

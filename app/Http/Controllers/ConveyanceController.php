@@ -106,6 +106,6 @@ class ConveyanceController extends Controller
         $conveyance->delete();
 
         // return to_route('conveyance.index');
-        return redirect()->route('conveyance.index');
+        return redirect()->route('conveyance.index')->withSuccess('Deleted Successfully!');
     }
 }
