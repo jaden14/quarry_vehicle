@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ConveyanceController;
 use App\Http\Controllers\ViolationTypeController;
+use App\Http\Controllers\VehicleViolationsController;
 use App\Http\Controllers\QuarryController;
 use App\Http\Controllers\SubquarryController;
 
@@ -27,8 +28,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/vehicleviolations',  [App\Http\Controllers\VehicleViolationsController::class, 'index'])->name('vehicleviolations');
-
 
 Route::middleware(['auth'])->group(function () {
 
@@ -47,12 +46,8 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Vehicle Violations Route
      */ 
-
+    Route::resource('/vehicleviolations', VehicleViolationsController::class);
 });
-
 Route::resource('/subquarries', SubquarryController::class);
-//Route::view('quarry', 'Quarry/quarry');
-//Route::post('quarry', [QuarryController::class,'addData']);
-//Route::get('quarry', [QuarryController::class,'dataList']);
 Route::get('delete/{id}', [QuarryController::class,'deleteData']);
 Route::put('edit/{id}', [QuarryController::class,'updateData']);
