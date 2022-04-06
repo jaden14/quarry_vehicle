@@ -87,6 +87,9 @@
                                 <tr>
                                     <th class="cell">ID</th>
                                     <th class="cell">Date</th>
+                                    <th class="cell">Time</th>
+                                    <th class="cell">Plate No.</th>
+                                    <th class="cell">Responsible</th>
                                     <th class="cell">Actions</th>
                                 </tr>
                             </thead>
@@ -94,9 +97,28 @@
                                 @forelse($vehicleviolations as $vehicleviolation)
                                     <tr>
                                         <td class="cell">{{ $vehicleviolation->id }}</td>
-                                        <td class="cell"><span class="truncate">{{ $vehicleviolation->date}}</span></td>
+                                        <td class="cell">{{ $vehicleviolation->date}}</td>
+                                        <td class="cell">{{ $vehicleviolation->time}}</td>
+                                        <td class="cell">{{ $vehicleviolation->plate_no}}</td>
+                                        <td class="cell">{{ $vehicleviolation->responsible}}</td>
                                         <td class="cell">
-                                            Action Goes Here
+                                            <form id="vehicle-violations-delete" action="{{ route('vehicleviolations.destroy', $vehicleviolation) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                {{-- <a class="btn-sm app-btn-warning m-2" href="{{ route('vehicleviolations.edit', $vehicleviolation) }}">Edit</a> --}}
+
+                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#editvehicleviolations{{"+".$vehicleviolation->id }}">
+                                                    Update
+                                                </button>
+
+                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#viewvehicleviolations{{"+".$vehicleviolation->id }}">
+                                                    View
+                                                </button>
+                                                
+                                                <button class="btn-sm app-btn-secondary" type="submit">Delete</button>
+
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

@@ -15,7 +15,7 @@ class VehicleViolationsController extends Controller
      */
     public function index()
     {
-        $vehicleviolations = VehicleViolations::select('id', 'date')->paginate(20);
+        $vehicleviolations = VehicleViolations::select('id', 'date', 'time','plate_no','responsible')->paginate(20);
         return view('vehicleviolations.index', compact('vehicleviolations'));
     }
     public function create()
