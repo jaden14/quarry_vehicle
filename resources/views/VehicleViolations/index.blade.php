@@ -75,5 +75,47 @@
             </div>
         </div>
     </div>
+
+    <!--Table Here-->
+    <div class="tab-content" id="orders-table-tab-content">
+        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+            <div class="app-card app-card-orders-table shadow-sm mb-5">
+                <div class="app-card-body">
+                    <div class="table-responsive">
+                        <table class="table app-table-hover mb-0 text-left">
+                            <thead>
+                                <tr>
+                                    <th class="cell">ID</th>
+                                    <th class="cell">Date</th>
+                                    <th class="cell">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($vehicleviolations as $vehicleviolation)
+                                    <tr>
+                                        <td class="cell">{{ $vehicleviolation->id }}</td>
+                                        <td class="cell"><span class="truncate">{{ $vehicleviolation->date}}</span></td>
+                                        <td class="cell">
+                                            Action Goes Here
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div><!--//table-responsive-->
+
+                </div><!--//app-card-body-->
+            </div><!--//app-card-->
+            <nav class="app-pagination">
+                {{--  {!! $conveyances->links() !!}  --}}
+            </nav><!--//app-pagination-->
+
+        </div><!--//tab-pane-->
+    </div><!--//tab-content-->
+
 </div>
 @endsection

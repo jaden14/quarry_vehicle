@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleViolations extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['description'];
+    protected $fillable = ['responsible'];
 }

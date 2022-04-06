@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\VehicleViolations;
+use App\Models\VehicleViolations;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,8 +15,8 @@ class VehicleViolationsController extends Controller
      */
     public function index()
     {
-        
-        return view('vehicleviolations.index');
+        $vehicleviolations = VehicleViolations::select('id', 'date')->paginate(20);
+        return view('vehicleviolations.index', compact('vehicleviolations'));
     }
     public function create()
     {
