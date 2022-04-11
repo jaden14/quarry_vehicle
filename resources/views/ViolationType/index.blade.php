@@ -10,45 +10,15 @@
         <div class="col-auto">
             <div class="page-utilities">
                 <div class="col-auto">
-
-                        <button type="button" class="btn app-btn-secondary" data-toggle="modal" data-target="#addViolationType">
-                            Add
-                        </button>
-
-                    </div><!--//col-->
+                    <div class="col-auto">
+                        <button type="button" class="btn app-btn-secondary" data-bs-toggle="modal" data-bs-target="#createViolation">Create</button>
+                    </div>
+                </div><!--//col-->
             </div><!--//table-utilities-->
         </div><!--//col-auto-->
     </div><!--//row-->
 
-    <!-- Create Violatin Type Modal -->
-    <div class="modal fade" id="addViolationType" tabindex="-1" role="dialog" aria-labelledby="addViolationType" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                
-                <form class="table-search-form row gx-1 align-items-center" action="{{ route('violationtype.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Create Violation Type</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-auto">
-                            <input type="text" placeholder="Description" name="description" class="form-control search-orders my-3">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn app-btn-secondary">Add</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-
+    <!--Table-->
     <div class="tab-content" id="orders-table-tab-content">
         <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
             <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -59,7 +29,7 @@
                                 <tr>
                                     <th class="cell">ID</th>
                                     <th class="cell">Description</th>
-                                    <th class="cell"></th>
+                                    <th class="cell">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,61 +38,78 @@
                                         <td class="cell">{{ $violationtype->id }}</td>
                                         <td class="cell"><span class="truncate">{{ $violationtype->description }}</span></td>
                                         <td class="cell">
-                                            <form id="conveyance-delete" action="{{ route('violationtype.destroy', $violationtype) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
+                                            <button type="button" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#editViolationType{{ $violationtype->id }}">
+                                                Update
+                                            </button>
+                                            <button type="button" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteViolationType{{ $violationtype->id }}">Delete</button>
+                                        </td>
+                                    </tr>
 
-                                                {{-- <a class="btn-sm app-btn-secondary m-2" href="{{ route('violationtype.edit', $violationtype) }}">Edit</a> --}}
+                                    <!-- Edit ViolationType Modal -->
+                                    <div class="modal fade" id="editViolationType{{ $violationtype->id }}" tabindex="-1" aria-labelledby="editviolationTypeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Violation Type</h5>
+                                                    <button type="button" class="btn" data-bs-dismiss="modal">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
 
-                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#editViolationType{{"+".$violationtype->id }}">
-                                                    Update
-                                                </button>
-                                                
-                                                <button class="btn-sm app-btn-secondary" type="submit">Delete</button>
-
-                                            </form>
-
-                                            <!-- Edit Violatin Type Modal -->
-                                            <div class="modal fade" id="editViolationType{{"+".$violationtype->id }}" tabindex="-1" role="dialog" aria-labelledby="editViolationType" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        
-                                                        <form class="settings-form" method="POST" action="{{ route('violationtype.update', $violationtype) }}">
-                                                            @csrf
-                                                            @method('PATCH')
-
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Violation Type</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="mb-3">
-                                                                    <label for="setting-input-3" class="form-label">Description</label>
-                                                                    <input type="text" class="form-control" name="description" value="{{ $violationtype->description }}">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn app-btn-secondary">Update</button>
-                                                            </div>
-                                                        </form>
-
-                                                    </div>
+                                            <form class="table-search-form row gx-1 align-items-center" method="POST" action="{{ route('violationtype.update', $violationtype) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                <label for="setting-input-3" class="form-label">Description</label>
+                                                <input type="text" class="form-control" name="description" value="{{ $violationtype->description }}">
                                                 </div>
                                             </div>
 
-                                        </td>
-                                    </tr>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn app-btn-primary">Update</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteViolationType{{ $violationtype->id }}" tabindex="-1" aria-labelledby="deleteViolationTypeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-centered">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteViolationTypeLabel">Delete</h5>
+                                                <button type="button" class="btn" data-bs-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form class="table-search-form row gx-1 align-items-center" id="deleteViolationType" action="{{ route('violationtype.destroy', $violationtype->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body">
+                                                    <p>Do you really want to delete this record? This process cannot be undone.</p>
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger text-white">Yes</button>
+                                                <button type="button" class="btn" data-bs-dismiss="modal">No</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+
                                 @empty
                                     <tr>
-                                        <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
+                                        <td class="cell" colspan="3"><span class="truncate">No Data</span></td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div><!--//table-responsive-->
+
+                    @include('ViolationType.modal')
 
                 </div><!--//app-card-body-->
             </div><!--//app-card-->
@@ -133,6 +120,5 @@
         </div><!--//tab-pane-->
     </div><!--//tab-content-->
 
-    
 </div>
 @endsection

@@ -15,8 +15,7 @@ class ConveyanceController extends Controller
      */
     public function index()
     {
-        $conveyances = Conveyance::select('id', 'description')->paginate(5);
-
+        $conveyances = Conveyance::select('id', 'description')->latest()->paginate(5);
         return view('Conveyance.index', compact('conveyances'));
     }
 
@@ -104,8 +103,6 @@ class ConveyanceController extends Controller
     public function destroy(Conveyance $conveyance)
     {
         $conveyance->delete();
-
-        // return to_route('conveyance.index');
         return redirect()->route('conveyance.index')->withSuccess('Deleted Successfully!');
     }
 }

@@ -1,26 +1,24 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en"> 
 <head>
-  <title>QVV System</title>
-
+    <title>Quarry and Vehicle Violation System</title>
+    
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Quarry and Vehicle Violsation System">
+    <meta name="author" content="Gian Carlo Marquez">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
 
-    <meta name="description" content="Quarry and Vehicle Violations System">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- App CSS -->
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('assets/css/portal.css') }}">
-
-    <!-- Sweet Alert -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head> 
     
     
 
@@ -43,23 +41,31 @@
             @include('layouts.components.footer')
         </div>
     </div>
+    @yield('scripts')
+    <!-- Javascript -->   
+    <!--{{ asset('assets/plugins/popper.min.js') }}-->     
     <script src="{{ asset('assets/plugins/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- Charts JS -->
-    <script src="{{ asset('assets/plugins/chart.js/chart.min.js') }}"></script>
-    <script src="{{ asset('assets/js/index-charts.js') }}"></script>
-
+    <script src="{{ asset('assets/plugins/chart.js/chart.min.js') }}"></script> 
+    
     <!-- Page Specific JS -->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-    
-    @yield('scripts')
+    <script src="{{ asset('assets/js/app.js') }}"></script> 
 
-    <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
-    
-</body>
+    <!--Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+    <!--Auto Focus-->
+    <script>
+    $('#createConveyance').on('shown.bs.modal', function() {
+        $(this).find('#conveyanceText').focus();
+    });
+
+    $('#createViolation').on('shown.bs.modal', function() {
+        $(this).find('#VehicleViolationType').focus();
+    });
+    </script>
+
+  </body>
 </html>

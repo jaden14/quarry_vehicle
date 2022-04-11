@@ -46,8 +46,11 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Vehicle Violations Route
      */ 
-    Route::resource('/vehicleviolations', VehicleViolationsController::class);
+    Route::resource('/vehicleviolations', VehicleViolationsController::class)->except([
+        'create', 'show'
+    ]);
 });
 Route::resource('/subquarries', SubquarryController::class);
 Route::get('delete/{id}', [QuarryController::class,'deleteData']);
 Route::put('edit/{id}', [QuarryController::class,'updateData']);
+Route::get('/search', [VehicleViolationsController::class,'search']);

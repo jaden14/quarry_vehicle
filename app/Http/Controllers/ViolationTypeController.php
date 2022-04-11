@@ -15,8 +15,7 @@ class ViolationTypeController extends Controller
      */
     public function index()
     {
-        $violationtypes = ViolationType::select('id', 'description')->paginate(20);
-
+        $violationtypes = ViolationType::select('id', 'description')->latest()->paginate(20);
         return view('ViolationType.index', compact('violationtypes'));
     }
 
@@ -104,8 +103,6 @@ class ViolationTypeController extends Controller
     public function destroy(ViolationType $violationtype)
     {
         $violationtype->delete();
-
-        // return to_route('conveyance.index');
         return redirect()->route('violationtype.index')->withSuccess('Deleted Successfully!');
     }
 }

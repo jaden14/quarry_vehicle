@@ -10,20 +10,9 @@
         <div class="col-auto">
             <div class="page-utilities">
                 <div class="col-auto">
-                        {{--  <form class="table-search-form row gx-1 align-items-center" action="{{ route('conveyance.store') }}" method="POST">
-                            @csrf
-
-                            <div class="col-auto">
-                                <input type="text" name="description" class="form-control search-orders">
-                            </div>  --}}
-                            <div class="col-auto">
-                                <button type="button" class="btn app-btn-secondary" data-toggle="modal" data-target="#createConveyance">Create</button>
-                            </div>
-                            {{--  <div class="col-auto">
-                                <button type="button" class="btn app-btn-secondary" data-toggle="modal" data-target="#editConveyance">Edit</button>
-                            </div>  --}}
-                        {{--  </form>  --}}
-
+                        <div class="col-auto">
+                            <button type="button" class="btn app-btn-secondary" data-bs-toggle="modal" data-bs-target="#createConveyance">Create</button>
+                        </div>
                     </div><!--//col-->
             </div><!--//table-utilities-->
         </div><!--//col-auto-->
@@ -39,74 +28,93 @@
                                 <tr>
                                     <th class="cell">ID</th>
                                     <th class="cell">Description</th>
-                                    <th class="cell"></th>
+                                    <th class="cell">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($conveyances as $key => $conveyance)
                                     <tr>
-                                        <td class="cell">{{ $key+1 }}</td>
+                                        <td class="cell">{{ $conveyance->id }}</td>
                                         <td class="cell"><span class="truncate">{{ $conveyance->description }}</span></td>
                                         <td class="cell">
-                                            <form id="conveyance-delete" action="{{ route('conveyance.destroy', $conveyance) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#editConveyance=?{{ $conveyance->id }}">Update</button>
-
-                                                {{--  <button type="button" class="btn-sm app-btn-secondary" data-toggle="modal" data-target="#deleteConveyance">Delete Modal</button>  --}}
-
-                                                <button class="btn-sm app-btn-secondary" type="submit">Delete</button>
-                                            </form>
+                                            <button type="button" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#editConveyance{{ $conveyance->id }}">Update</button>
+                                            <button type="button" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConveyance{{ $conveyance->id }}">Delete</button>
                                         </td>
                                     </tr>
 
-                                    <!-- Conveyance Edit Modal -->
-                                    <div class="modal fade" id="editConveyance=?{{ $conveyance->id }}" tabindex="-1" role="dialog" aria-labelledby="editConveyanceLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editConveyanceLabel">Update</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <!-- Edit Conveyance Modal -->
+                                    <div class="modal fade" id="editConveyance{{ $conveyance->id }}" tabindex="-1" aria-labelledby="deleteConveyanceModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Conveyance</h5>
+                                                    <button type="button" class="btn" data-bs-dismiss="modal">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
-                                                </div>
-                                                <!-- Modal -->
-                                                <form class="table-search-form row gx-1 align-items-center" action="{{ route('conveyance.update', $conveyance) }}" method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-
-                                                    <div class="modal-body">
-                                                        <input type="text" name="description" value="{{ $conveyance->description }}" class="form-control search-orders">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary text-white">Save</button>
-                                                    </div>
-                                                    </div>
-                                                </form>
                                             </div>
+
+                                            <form class="table-search-form row gx-1 align-items-center" method="POST" action="{{ route('conveyance.update', $conveyance) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                <label for="setting-input-3" class="form-label">Description</label>
+                                                <input type="text" class="form-control" name="description" value="{{ $conveyance->description }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn app-btn-primary">Update</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteConveyance{{ $conveyance->id }}" tabindex="-1" aria-labelledby="deleteConveyanceModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-centered">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteConveyanceLabel">Delete</h5>
+                                                <button type="button" class="btn" data-bs-dismiss="modal">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form class="table-search-form row gx-1 align-items-center" id="conveyance-delete" action="{{ route('conveyance.destroy', $conveyance->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body">
+                                                    <p>Do you really want to delete this record? This process cannot be undone.</p>
+                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger text-white">Yes</button>
+                                                <button type="button" class="btn" data-bs-dismiss="modal">No</button>
+                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 @empty
                                     <tr>
-                                        <td class="cell" colspan="2"><span class="truncate">No Data</span></td>
+                                        <td class="cell" colspan="3"><span class="truncate">No Data</span></td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div><!--//table-responsive-->
+                                
+                    @include('Conveyance.modal')
 
                 </div><!--//app-card-body-->
             </div><!--//app-card-->
             <nav class="app-pagination">
-                {{--  {!! $conveyances->links() !!}  --}}
+                <ul class="pagination justify-content-center">
+                {!! $conveyances->links() !!}
             </nav><!--//app-pagination-->
 
         </div><!--//tab-pane-->
     </div><!--//tab-content-->
-
-    @include('Conveyance.modal')
 
 </div>
 @endsection
