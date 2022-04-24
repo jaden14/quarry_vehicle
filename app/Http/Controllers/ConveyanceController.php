@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conveyance;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class ConveyanceController extends Controller
 {
@@ -15,18 +16,16 @@ class ConveyanceController extends Controller
      */
     public function index()
     {
-        $conveyances = Conveyance::select('id', 'description')->latest()->paginate(5);
-        return view('Conveyance.index', compact('conveyances'));
+        return view('Conveyance.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function fetchconveyances()
     {
-        //
+        $conveyances = Conveyance::all();
+
+        return response()->json([
+            'conveyances'  => $conveyances,
+        ]);
     }
 
     /**
@@ -37,29 +36,28 @@ class ConveyanceController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'description'   => ['required', 'max:255', 'string']
+        $validator = Validator::make($request->all(), [
+            'description' => 'required|max:50'
         ]);
 
-        Conveyance::create([
-            'description'   =>  $request->description
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'    => 400,
+                'errors'    => $validator->messages(),
+            ]);
+        }
+
+        $conveyance = new Conveyance;
+        $conveyance->description = $request->input('description');
+        $conveyance->save();
+
+        return response()->json([
+            'status'    => 200,
+            'message'    => 'Added Successfully',
         ]);
-
-        \Session::flash('success', $request->description . ' has been added successfully.');
-
-        return redirect()->route('conveyance.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Conveyance  $conveyance
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Conveyance $conveyance)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -67,9 +65,23 @@ class ConveyanceController extends Controller
      * @param  \App\Models\Conveyance  $conveyance
      * @return \Illuminate\Http\Response
      */
-    public function edit(Conveyance $conveyance)
+    public function edit($id)
     {
-        return view('Conveyance.edit', compact('conveyance'));
+        $conveyance = Conveyance::find($id);
+
+        // Check if id exist
+        if($conveyance)
+        {
+            return response()->json([
+                'status'    => 200,
+                'conveyance'   => $conveyance,
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => 'Not Found!',
+            ]);
+        }
     }
 
     /**
@@ -79,19 +91,39 @@ class ConveyanceController extends Controller
      * @param  \App\Models\Conveyance  $conveyance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Conveyance $conveyance)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'description'   => ['required', 'max:255', 'string']
+        $validator = Validator::make($request->all(), [
+            'description' => 'required|max:50'
         ]);
 
-        $conveyance->update([
-            'description'   =>  $request->description
-        ]);
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'    => 400,
+                'errors'    => $validator->messages(),
+            ]);
+        }
 
-        \Session::flash('success', $request->description . ' modified successfully.');
+        $conveyance = Conveyance::find($id);
 
-        return redirect()->route('conveyance.index');
+        // Check if id exist
+        if($conveyance)
+        {
+            $conveyance->description = $request->input('description');
+            $conveyance->update();
+
+            return response()->json([
+                'status'    => 200,
+                'message'    => 'Update Successfully',
+            ]);
+
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => 'Not Found!',
+            ]);
+        }
     }
 
     /**
@@ -102,7 +134,6 @@ class ConveyanceController extends Controller
      */
     public function destroy(Conveyance $conveyance)
     {
-        $conveyance->delete();
-        return redirect()->route('conveyance.index')->withSuccess('Deleted Successfully!');
+
     }
 }

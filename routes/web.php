@@ -34,9 +34,13 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Conveyance Route
      */
-    Route::resource('/conveyance', ConveyanceController::class)->except([
-        'create', 'show', 'edit'
-    ]);
+    Route::get('conveyance', [ConveyanceController::class, 'index'])->name('conveyance');
+    Route::get('fetch-conveyance', [ConveyanceController::class, 'fetchconveyances']);
+    Route::post('conveyance', [ConveyanceController::class, 'store']);
+    Route::get('edit-conveyance/{id}', [ConveyanceController::class, 'edit']);
+    Route::put('update-conveyance/{id}', [ConveyanceController::class, 'update']);
+// Route::delete('delete-student/{id}', [StudentController::class, 'destroy']); // Not Working
+
     /**
      * Violation Type Route
      */
@@ -45,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
     ]);
     /**
      * Vehicle Violations Route
-     */ 
+     */
     Route::resource('/vehicleviolations', VehicleViolationsController::class)->except([
         'create', 'show'
     ]);
