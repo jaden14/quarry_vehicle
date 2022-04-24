@@ -42,5 +42,5 @@ e.g
 
 # Reference: 
 
-1. [https://sweetalert2.github.io/#examples](Sweet Alert Docs)
-2. [https://codingdriver.com/sweetalert-with-laravel-ajax.html](Ajax Guide for Sweetalert)
+1. [SweetAlert Docs](https://sweetalert2.github.io/#examples)
+2. [Ajax Guide for Sweetalert](https://codingdriver.com/sweetalert-with-laravel-ajax.html)
