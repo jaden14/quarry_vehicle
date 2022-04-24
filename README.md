@@ -38,3 +38,8 @@ e.g
 ```php
 127.0.0.1:8000/quarry
 ```
+
+
+# Reference: 
+
+1. Sweet Alert Docs (https://sweetalert2.github.io/#examples)
