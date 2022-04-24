@@ -54,7 +54,7 @@ class ConveyanceController extends Controller
 
         return response()->json([
             'status'    => 200,
-            'message'    => 'Added Successfully',
+            'message'   => $request->description . ' has been added successfully',
         ]);
     }
 
@@ -105,7 +105,7 @@ class ConveyanceController extends Controller
             ]);
         }
 
-        $conveyance = Conveyance::find($id);
+        $conveyance = Conveyance::find(472);
 
         // Check if id exist
         if($conveyance)
@@ -115,13 +115,13 @@ class ConveyanceController extends Controller
 
             return response()->json([
                 'status'    => 200,
-                'message'    => 'Update Successfully',
+                'message'    => $request->description . ' has been update successfully',
             ]);
 
         } else {
             return response()->json([
                 'status'    => 404,
-                'message'   => 'Not Found!',
+                'message'   => "We can't find " . $request->description,
             ]);
         }
     }

@@ -32,14 +32,6 @@
             });
         }
 
-        function disableBtn() {
-            if(document.getElementById("conveyanceInputDescription").value==="") {
-                document.getElementById('createConveyanceBtn').disabled = true;
-            } else {
-                document.getElementById('createConveyanceBtn').disabled = false;
-            }
-        }
-
         $(document).on('click', '.edit_conveyance', function (e) {
             e.preventDefault();
             var id = $(this).val();
@@ -58,6 +50,8 @@
                         $('#success_message').html(""); // Empty
                         $('#success_message').addClass('alert alert-danger');
                         $('#success_message').text(response.message);
+
+                        swal('danger', response.message);
                     } else {
 
                         // Put the data inside modal input
@@ -104,24 +98,21 @@
 
                     } else if(response.status == 404) {
 
-                        $('#updateform_errList').html("");
-                        $('#success_message').addClass('alert alert-success')
-                        $('#success_message').text(response.message)
+                        swal('warning', 'Oops!', response.message);
 
                         $('.update_conveyance').text('Update');
 
                     } else {
 
                         $('#updateform_errList').html("");
-                        $('#success_message').html("");
-                        $('#success_message').addClass('alert alert-success')
-                        $('#success_message').text(response.message)
 
                         $('#EditConveyanceModal').modal('hide');
 
                         $('.update_conveyance').text('Update');
 
                         fetchstudent();
+                        swal('success', 'Success', response.message);
+
                     }
                 }
             });
@@ -158,20 +149,29 @@
                         })
                     } else {
 
-                        $('#saveform_errList').html("");
-                        $('#success_message').addClass('alert alert-success')
-                        $('#success_message').text(response.message)
-
                         // Remove modal
                         $('#CreateConveyanceModal').modal('hide');
                         // Remove modal input value
                         $('#CreateConveyanceModal').find('input').val("");
 
                         fetchstudent();
+
+                        swal('success', 'Success', response.message);
                     }
                 }
             });
         });
+
+        function swal(icon, title, message)
+        {
+            // Show success
+            Swal.fire({
+                icon: icon,
+                title: title,
+                text: message,
+                timer: 3000,
+            });
+        }
 
     });
 </script>
