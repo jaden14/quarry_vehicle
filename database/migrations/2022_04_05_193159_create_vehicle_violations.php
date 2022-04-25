@@ -19,7 +19,7 @@ class CreateVehicleViolations extends Migration
             $table->time('time')->nullable();
             $table->string('plate_no')->nullable();
             $table->string('responsible')->nullable();
-            $table->string('coveyance_type')->nullable();
+            $table->string('conveyance_type')->nullable();
             $table->string('violation_type')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();

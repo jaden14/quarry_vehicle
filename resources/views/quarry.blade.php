@@ -4,9 +4,9 @@
 <div class="container-xl">
 
     @if(session('name'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">Added successfully!
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">Added successfully!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     @endif
 
     @if(session('delete'))
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="row">
                                 <div class="col-md">
                                     <div class="form-floating">
@@ -89,7 +89,7 @@
                                         <label for="busName">Bus Name</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="busAddress" placeholder="Bus Address" name="busAddress">
@@ -105,7 +105,7 @@
                                         <label for="contactPerson">Contact Person</label>
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="contactNum" placeholder="Contact Number" name="contactNum">
@@ -161,7 +161,7 @@
                                         <label for="firstNotice">First Notice</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input id ="firstNoticeDate" class="form-control" type="date" name="firstNoticeDate"/>
@@ -177,7 +177,7 @@
                                         <label for="secondNotice">Second Notice</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input id ="secondNoticeDate" class="form-control" type="date" name="secondNoticeDate"/>
@@ -193,7 +193,7 @@
                                         <label for="thirdNotice">Third Notice</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input id ="thirdNoticeDate" class="form-control" type="date" name="thirdNoticeDate"/>
@@ -212,27 +212,27 @@
                     </div>
                 </div>
 
-              
+
                     </div>
-        
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary text-white" id="btnShow">Set</button>
                     </div>
             </form>
-                
-                        
+
+
                     </div>
-                
+
             </div>
 
     </div>
     </div>
     </div>
-    
 
 
 
-    
+
+
     <!-- Table -->
     <div class="tab-content mt-3" id="orders-table-tab-content">
         <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -248,9 +248,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    
+
                             </tbody>
-                
+
                     </div>
 
                 </div>
@@ -298,7 +298,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <div class="row">
                                 <div class="col-md">
                                     <div class="form-floating">
@@ -325,7 +325,7 @@
                                         <label for="busName">Bus Name</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="busAddress" placeholder="Bus Address" name="busAddress">
@@ -341,7 +341,7 @@
                                         <label for="contactPerson">Contact Person</label>
                                     </div>
                                 </div>
-                            
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="contactNum" placeholder="Contact Number" name="contactNum">
@@ -397,7 +397,7 @@
                                         <label for="firstNotice">First Notice</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input id ="firstNoticeDate" class="form-control" type="date" name="firstNoticeDate"/>
@@ -413,7 +413,7 @@
                                         <label for="secondNotice">Second Notice</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input id ="secondNoticeDate" class="form-control" type="date" name="secondNoticeDate"/>
@@ -429,7 +429,7 @@
                                         <label for="thirdNotice">Third Notice</label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md">
                                     <div class="form-floating">
                                         <input id ="thirdNoticeDate" class="form-control" type="date" name="thirdNoticeDate"/>
@@ -461,19 +461,19 @@
         <div class="modal-footer">
             <button type="submit" id="submit" class="btn btn-primary text-white">Save Changes</button>
         </div>
-        
+
         </form>
 
-        
+
 
     </div>
     </div>
     </div>
-    
-2@endsection
+
+@endsection
 
 @section('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="/assets/js/quarry.js"></script>
 @endsection
