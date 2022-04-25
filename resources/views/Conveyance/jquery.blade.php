@@ -24,7 +24,7 @@
                                 <td>'+item.description+'</td>\
                                 <td>\
                                     <button type="button" value="'+item.id+'" class="edit_conveyance btn btn-warning btn-sm">Edit</button>\
-                                    <button type="button" value="'+item.id+'" class="delete_student btn btn-danger btn-sm">Delete</button>\
+                                    <button type="button" value="'+item.id+'" class="delete_conveyance btn btn-danger btn-sm">Delete</button>\
                                 </td>\
                             </tr>');
                     });
@@ -160,6 +160,46 @@
                     }
                 }
             });
+        });
+
+        // Delete data
+        $(document).on('click', '.delete_conveyance', function (e) {
+            e.preventDefault();
+            var id = $(this).val(); // get ID
+
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "/delete-conveyance/"+id,
+                        data: {
+                            '_method': 'delete'
+                        },
+                        success: function (response, textStatus, xhr) {
+                            console.log(response);
+                            if(response.status == 404)
+                            {
+                                swal('warning', 'Oops!', response.message);
+                            } else {
+
+                                swal('success', 'Success', response.message);
+                                fetchstudent();
+
+                            }
+                        }
+                    });
+                }
+            });
+
         });
 
         function swal(icon, title, message)

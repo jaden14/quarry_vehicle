@@ -45,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('conveyance', [ConveyanceController::class, 'store']);
     Route::get('edit-conveyance/{id}', [ConveyanceController::class, 'edit']);
     Route::put('update-conveyance/{id}', [ConveyanceController::class, 'update']);
-// Route::delete('delete-student/{id}', [StudentController::class, 'destroy']); // Not Working
+    Route::delete('delete-conveyance/{id}', [ConveyanceController::class, 'destroy']); // Not Working
 
     /**
      * Violation Type Route

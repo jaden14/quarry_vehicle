@@ -132,8 +132,24 @@ class ConveyanceController extends Controller
      * @param  \App\Models\Conveyance  $conveyance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Conveyance $conveyance)
+    public function destroy($id)
     {
+        $conveyance = Conveyance::find($id);
 
+        // Check if id exist
+        if($conveyance)
+        {
+            $conveyance->delete();
+
+            return response()->json([
+                'status'    => 200,
+                'message'   => $conveyance->description . ' has been deleted.',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => "Record doesn't exist",
+            ]);
+        }
     }
 }
