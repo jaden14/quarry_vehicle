@@ -1,3 +1,15 @@
+# Module Checklist
+
+- [/] Conveyance - Jquery (Create, Update, Validate) Included
+- [/] Violation Type
+- [/] Vehicle Violations
+
+Jquery to be implement on the ff:
+- [x] Violation Type
+- [x] Vehicle Violations
+- [x] Quarry and Sub-Quarry
+
+# Installation
 There is no font package included here, if you want to add icon/s go to https://icons.getbootstrap.com/ then copy the HTML SVG for performance.
 
 To install:
