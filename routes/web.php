@@ -29,6 +29,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+/**
+ * Please PUT your route on auth group to make it secure
+ *
+ */
+
 Route::middleware(['auth'])->group(function () {
 
     /**
@@ -53,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/vehicleviolations', VehicleViolationsController::class)->except([
         'create', 'show'
     ]);
+
+
 });
 Route::resource('/subquarries', SubquarryController::class);
 Route::get('delete/{id}', [QuarryController::class,'deleteData']);
