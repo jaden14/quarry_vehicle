@@ -46,7 +46,7 @@ class ConveyanceController extends Controller
             'description'   =>  $request->description
         ]);
 
-        \Session::flash('success', $request->description . ' has been added successfully.');
+        Session::flash('success', $request->description . ' has been added successfully.');
 
         return redirect()->route('conveyance.index');
     }
