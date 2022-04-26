@@ -21,8 +21,11 @@ use App\Http\Controllers\SubquarryController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('auth.login');
+// });
 Route::get('/', function () {
-    return view('auth.login');
+    return redirect()->route('home');
 });
 
 Auth::routes();
