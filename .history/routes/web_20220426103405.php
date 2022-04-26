@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     //     'create', 'show'
     // ]);
     Route::get('violationtype', [ViolationTypeController::class, 'index'])->name('violationtype');
-    Route::get('fetch-violationtype', [ViolationTypeController::class, 'fetchviolationtypes']);
+    Route::get('fetch-conveyance', [ViolationTypeController::class, 'fetchviolationtypes']);
     Route::post('violationtype', [ViolationTypeController::class, 'store']);
     Route::get('edit-violationtype/{id}', [ViolationTypeController::class, 'edit']);
     Route::put('update-violationtype/{id}', [ViolationTypeController::class, 'update']);
