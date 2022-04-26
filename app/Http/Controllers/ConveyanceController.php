@@ -105,7 +105,7 @@ class ConveyanceController extends Controller
             ]);
         }
 
-        $conveyance = Conveyance::find(472);
+        $conveyance = Conveyance::find($id);
 
         // Check if id exist
         if($conveyance)
