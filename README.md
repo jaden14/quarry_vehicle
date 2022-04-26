@@ -3,10 +3,11 @@
 - [x] Conveyance - Jquery (Create, Update, Validate, Delete) Included
 - [x] Violation Type - Jquery (Create, Update, Validate, Delete) Included
 - [x] Vehicle Violations
+- [x] Quarry and Sub-Quarry
 
 Jquery to be implement on the ff:
 - [  ] Vehicle Violations
-- [  ] Quarry and Sub-Quarry
+
 
 # Installation
 There is no font package included here, if you want to add icon/s go to https://icons.getbootstrap.com/ then copy the HTML SVG for performance.
