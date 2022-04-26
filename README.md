@@ -5,7 +5,6 @@
 - [x] Vehicle Violations
 
 Jquery to be implement on the ff:
-- [  ] Violation Type
 - [  ] Vehicle Violations
 - [  ] Quarry and Sub-Quarry
 
