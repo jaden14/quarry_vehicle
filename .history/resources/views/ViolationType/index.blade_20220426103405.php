@@ -11,7 +11,7 @@
             <div class="page-utilities">
                 <div class="col-auto">
                         <div class="col-auto">
-                            <button type="button" class="btn app-btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateViolationTypeModal">Create</button>
+                            <button type="button" class="btn app-btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateConveyanceModal">Create</button>
                         </div>
                     </div><!--//col-->
             </div><!--//table-utilities-->

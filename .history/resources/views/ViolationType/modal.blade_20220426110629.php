@@ -1,6 +1,6 @@
 <!-- Create Modal -->
 <div class="modal fade" id="CreateViolationTypeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-centered">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Add ViolationType</h5>
@@ -26,7 +26,7 @@
 
 <!-- Edit Student Modal -->
 <div class="modal fade" id="EditViolationTypeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-centered">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Edit</h5>

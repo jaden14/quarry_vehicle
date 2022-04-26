@@ -1,9 +1,9 @@
 <!-- Create Modal -->
-<div class="modal fade" id="CreateViolationTypeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="CreateConveyanceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add ViolationType</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Conveyance</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -18,15 +18,15 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary create_violationtype">Save changes</button>
+            <button type="button" class="btn btn-primary create_conveyance">Save changes</button>
         </div>
         </div>
     </div>
 </div>
 
 <!-- Edit Student Modal -->
-<div class="modal fade" id="EditViolationTypeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="EditConveyanceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
@@ -50,7 +50,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary update_violationtype">Save changes</button>
+            <button type="button" class="btn btn-primary update_conveyance">Save changes</button>
         </div>
         </div>
     </div>

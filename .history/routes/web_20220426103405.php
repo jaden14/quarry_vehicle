@@ -3,10 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ConveyanceController;
 use App\Http\Controllers\ViolationTypeController;
 use App\Http\Controllers\VehicleViolationsController;
 use App\Http\Controllers\QuarryController;
+use App\Http\Controllers\SubquarryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     //     'create', 'show'
     // ]);
     Route::get('violationtype', [ViolationTypeController::class, 'index'])->name('violationtype');
-    Route::get('fetch-violationtype', [ViolationTypeController::class, 'fetchviolationtypes']);
+    Route::get('fetch-conveyance', [ViolationTypeController::class, 'fetchviolationtypes']);
     Route::post('violationtype', [ViolationTypeController::class, 'store']);
     Route::get('edit-violationtype/{id}', [ViolationTypeController::class, 'edit']);
     Route::put('update-violationtype/{id}', [ViolationTypeController::class, 'update']);
@@ -67,18 +69,9 @@ Route::middleware(['auth'])->group(function () {
         'create', 'show'
     ]);
 
-    /**
-     * Quarry Route
-     */
-
-    
 
 });
-
-// Route::get('quarry-index', [QuarryController::class, 'index'])->name('index.quarry');
-Route::post('quarry', [QuarryController::class,'addData']);
-Route::get('quarry', [QuarryController::class,'dataList'])->name('quarry');
-Route::post('lastid', [QuarryController::class,'lastID']);
-Route::delete('delete/{id}', [QuarryController::class,'deleteData']);
+Route::resource('/subquarries', SubquarryController::class);
+Route::get('delete/{id}', [QuarryController::class,'deleteData']);
 Route::put('edit/{id}', [QuarryController::class,'updateData']);
 Route::get('/search', [VehicleViolationsController::class,'search']);

@@ -1,11 +1,10 @@
 # Module Checklist
 
-- [x] Conveyance - Jquery (Create, Update, Validate) Included
-- [x] Violation Type
+- [x] Conveyance - Jquery (Create, Update, Validate, Delete) Included
+- [x] Violation Type - Jquery (Create, Update, Validate, Delete) Included
 - [x] Vehicle Violations
 
 Jquery to be implement on the ff:
-- [  ] Violation Type
 - [  ] Vehicle Violations
 - [  ] Quarry and Sub-Quarry
 
