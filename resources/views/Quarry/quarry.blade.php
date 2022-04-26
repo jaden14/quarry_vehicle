@@ -3,6 +3,7 @@
 @section('content')
 <div class="container-xl">
 
+
     <!-- Button trigger modal -->
     <button type="button" class="btn-sm app-btn-secondary px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add</button>
 
@@ -17,7 +18,7 @@
                     <li class="nav-item">
                         <button class="nav-link text-success" role="tab" data-bs-toggle="tab" id="sub-quarry-tab" data-bs-target="#subQuarryTab" aria-controls="subQuarryTab" aria-selected="false">Sub Quarry</button>
                     </li>
-                    <button type="button" class="btn-close position-absolute top-10 end-0 pr-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close position-absolute end-0 pe-5" data-bs-dismiss="modal" aria-label="Close"></button>
                 </ul>
 
                 <div class="modal-body" style="height:500px;">
@@ -403,7 +404,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="quarryTypes" name="quarryTypes">
+                                                    <select class="form-select" id="quarryTypes" name="quarryTypes" disabled>
                                                         <option value="CSAG">CSAG</option>
                                                         <option value="CE">CE</option>
                                                         <option value="ISAG">ISAG</option>
@@ -581,15 +582,16 @@
 
 
             </div>
+
         </div>
     </div>
+
 
 
     @endsection
 
     @section('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/js/quarry.js"></script>
     <script src="/assets/js/quarry-delete-edit.js"></script>

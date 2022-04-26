@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Quarry extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['description'];
 }
 
 

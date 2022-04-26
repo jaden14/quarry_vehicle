@@ -23,6 +23,7 @@ class QuarryController extends Controller
         return response()->json(array('last_insert_id' =>$id), 200);
 
     }
+    
     function addData(Request $req)
     {
         $input = $req->only('requirement');
@@ -65,6 +66,7 @@ class QuarryController extends Controller
     function deleteData($id)
     {
         $data = Quarry::find($id);
+        Subquarry::find($data->subquarry_id)->delete();
         $data->delete();
         return true;
     }
@@ -103,16 +105,6 @@ class QuarryController extends Controller
 
     // SUBQUARRY
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $subquarries = Subquarry::all();
-        return view('quarry', ["subquarries" => $subquarries]);
-    }
 
     /**
      * Show the form for creating a new resource.
