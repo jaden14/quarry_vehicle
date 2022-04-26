@@ -15,7 +15,7 @@ class CreateSubquarriesTable extends Migration
     {
         Schema::create('subquarries', function (Blueprint $table) {
             $table->id();
-            $table->string('requirements');
+            $table->json('requirements');
             $table->timestamps();
         });
     }

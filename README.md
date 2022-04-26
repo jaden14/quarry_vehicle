@@ -1,3 +1,15 @@
+# Module Checklist
+
+- [x] Conveyance - Jquery (Create, Update, Validate, Delete) Included
+- [x] Violation Type - Jquery (Create, Update, Validate, Delete) Included
+- [x] Vehicle Violations
+- [x] Quarry and Sub-Quarry
+
+Jquery to be implement on the ff:
+- [  ] Vehicle Violations
+
+
+# Installation
 There is no font package included here, if you want to add icon/s go to https://icons.getbootstrap.com/ then copy the HTML SVG for performance.
 
 To install:
@@ -38,3 +50,9 @@ e.g
 ```php
 127.0.0.1:8000/quarry
 ```
+
+
+# Reference: 
+
+1. [SweetAlert Docs](https://sweetalert2.github.io/#examples)
+2. [Ajax Guide for Sweetalert](https://codingdriver.com/sweetalert-with-laravel-ajax.html)
