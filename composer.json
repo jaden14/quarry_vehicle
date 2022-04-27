@@ -13,8 +13,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "realrashid/sweet-alert": "^5.0",
-        "twbs/bootstrap": "5.0.2",
-        "yajra/laravel-datatables-oracle": "^9.19"
+        "twbs/bootstrap": "5.0.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
