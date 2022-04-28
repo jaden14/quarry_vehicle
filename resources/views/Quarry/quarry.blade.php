@@ -16,7 +16,7 @@
                         <button class="nav-link text-success active" role="tab" data-bs-toggle="tab" id="quarry-tab" data-bs-target="#quarryTab" aria-controls="quarryTab" aria-selected="true">Quarry</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link text-success" role="tab" data-bs-toggle="tab" id="sub-quarry-tab" data-bs-target="#subQuarryTab" aria-controls="subQuarryTab" aria-selected="false">Sub Quarry</button>
+                        <button class="nav-link text-success" role="tab" data-bs-toggle="tab" id="sub-quarry-tab" data-bs-target="#subQuarryTab" aria-controls="subQuarryTab" aria-selected="false" onclick="toggleNextBtn()">Sub Quarry</button>
                     </li>
                     <button type="button" class="btn-close position-absolute end-0 pe-5" data-bs-dismiss="modal" aria-label="Close"></button>
                 </ul>
@@ -24,6 +24,7 @@
                 <div class="modal-body" style="height:500px;">
                     <form action="quarry" method="POST" class="tab-content">
                         @csrf
+                        <input type="text" name="status" value="Approved" hidden>
                         <div class="tab-pane fade show active" role="tabpanel" id="quarryTab" aria-labelledby="quarry-tab">
                             <div class="row g-2">
                                 <div class="col-6">
@@ -32,14 +33,14 @@
                                             <div class="row g-3 mb-3 align-items-center justify-content-between">
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input id="dateApplied" class="form-control" type="date" name="dateApplied" />
+                                                        <input id="dateApplied" class="form-control" type="date" name="dateApplied" required/>
                                                         <label for="dateApplied">Date Applied</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <select class="form-select" id="quarryTypes" name="quarryTypes">
+                                                        <select class="form-select" id="quarryTypes" name="quarryTypes" required>
                                                             <option selected disabled>Select Option</option>
                                                             <option value="CSAG">CSAG</option>
                                                             <option value="CE">CE</option>
@@ -66,7 +67,7 @@
                                             <div class="row">
                                                 <div class="col-md">
                                                     <div class="form-floating mt-3">
-                                                        <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                                                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
                                                         <label for="name">Name</label>
                                                     </div>
                                                 </div>
@@ -76,14 +77,14 @@
                                             <div class="row g-2 mt-2">
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="busName" placeholder="Bus Name" name="busName">
+                                                        <input type="text" class="form-control" id="busName" placeholder="Bus Name" name="busName" required>
                                                         <label for="busName">Bus Name</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="busAddress" placeholder="Bus Address" name="busAddress">
+                                                        <input type="text" class="form-control" id="busAddress" placeholder="Bus Address" name="busAddress" required>
                                                         <label for="busAddress">Bus Address</label>
                                                     </div>
                                                 </div>
@@ -92,14 +93,14 @@
                                             <div class="row g-2 mt-2">
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="contactPerson" placeholder="Contact Person" name="contactPerson">
+                                                        <input type="text" class="form-control" id="contactPerson" placeholder="Contact Person" name="contactPerson" required>
                                                         <label for="contactPerson">Contact Person</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="contactNum" placeholder="Contact Number" name="contactNum">
+                                                        <input type="text" class="form-control" id="contactNum" placeholder="Contact Number" name="contactNum" required>
                                                         <label for="contactNum">Contact Number</label>
                                                     </div>
                                                 </div>
@@ -108,14 +109,14 @@
                                             <div class="row g-2 mt-2">
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="postalAddress" placeholder="Postal Address" name="postalAddress">
+                                                        <input type="text" class="form-control" id="postalAddress" placeholder="Postal Address" name="postalAddress" required>
                                                         <label for="postalAddress">Postal Address</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <select class="form-select" id="municipality" name="municipality">
+                                                        <select class="form-select" id="municipality" name="municipality" required>
                                                             @foreach($municipalities as $municipality)
                                                             <option value="{{$municipality['id']}}">{{$municipality->munname}}</option>
                                                             @endforeach
@@ -124,12 +125,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md">
-                                                    <div class="form-floating">
-                                                        <input type="text" class="form-control" id="status" placeholder="Status" name="status">
-                                                        <label for="status">Status</label>
-                                                    </div>
-                                                </div>
+                                             
                                             </div>
 
                                         </div>
@@ -148,14 +144,14 @@
                                             <div class="row g-2">
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="firstNotice" placeholder="First Notice" name="firstNotice">
+                                                        <input type="text" class="form-control" id="firstNotice" placeholder="First Notice" name="firstNotice" required>
                                                         <label for="firstNotice">First Notice</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input id="firstNoticeDate" class="form-control" type="date" name="firstNoticeDate" />
+                                                        <input id="firstNoticeDate" class="form-control" type="date" name="firstNoticeDate" required/>
                                                         <label for="firstNoticeDate">Date</label>
                                                     </div>
                                                 </div>
@@ -164,14 +160,14 @@
                                             <div class="row g-2 mt-0">
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="secondNotice" placeholder="Second Notice" name="secondNotice">
+                                                        <input type="text" class="form-control" id="secondNotice" placeholder="Second Notice" name="secondNotice" required>
                                                         <label for="secondNotice">Second Notice</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input id="secondNoticeDate" class="form-control" type="date" name="secondNoticeDate" />
+                                                        <input id="secondNoticeDate" class="form-control" type="date" name="secondNoticeDate" required/>
                                                         <label for="secondNoticeDate">Date</label>
                                                     </div>
                                                 </div>
@@ -180,24 +176,31 @@
                                             <div class="row g-2 mt-0">
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input type="text" class="form-control" id="thirdNotice" placeholder="Third Notice" name="thirdNotice">
+                                                        <input type="text" class="form-control" id="thirdNotice" placeholder="Third Notice" name="thirdNotice" required>
                                                         <label for="thirdNotice">Third Notice</label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md">
                                                     <div class="form-floating">
-                                                        <input id="thirdNoticeDate" class="form-control" type="date" name="thirdNoticeDate" />
+                                                        <input id="thirdNoticeDate" class="form-control" type="date" name="thirdNoticeDate" required />
                                                         <label for="thirdNoticeDate">Date</label>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="form-floating mt-4">
-                                                <textarea class="form-control" placeholder="Remarks" id="remarks" style="height: 100px" name="remarks"></textarea>
+                                                <textarea class="form-control" placeholder="Remarks" id="remarks" style="height: 100px" name="remarks" required></textarea>
                                                 <label for="remarks">Remarks</label>
-                                                <p class="mt-3" id="dateLastUpdated" name="dateLastUpdated">Date last updated:</p>
                                             </div>
+
+                                            <div class="row g-2 mt-3">
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control" id="dateLastUpdated" placeholder="Date Last Updated" name="dateLastUpdated" disabled>
+                                                    <label for="status">Date Last Updated</label>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -262,17 +265,22 @@
 
                             <label for="CSAGCEFP"><input type="checkbox" id="CSAGCEFP" name="requirement[]" value="Yes" required> 17. 1 Year Work Program (CSAG/CEFP)/5 year Work Program (ISAG/Quarry) </label><br>
 
-                            <input type="checkbox" id="Seedlings" name="Seedlings" value="requirement[]" required>
+                            <input type="checkbox" id="Seedlings" name="requirement[]" value="Seedlings" required>
                             <label for="Seedlings">18. Seedlings(Forest Trees or High Value Crops) </label><br>
 
-                            <input type="checkbox" id="Payments" name="Payments" value="requirement[]" required>
+                            <input type="checkbox" id="Payments" name="requirement[]" value="Payments" required>
                             <label for="Payments"> 19. Payments </label><br>
                         </div>
 
                 </div>
-
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary text-white" id="submitBtn">Submit</button>
+                        <button type="button" class="btn btn-primary text-white" id="next-page-tab" onclick="toggleNextBtn()" >Next 
+                        </button>
+                        <button type="submit" class="btn btn-primary text-white" id="submitBtn" style="display:none;">Submit 
+                            <div class="spinner-border spinner-border-sm text-secondary ms-2" role="status" id="spinner-submit" style="display:none;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>  
+                        </button>
                 </div>
 
                 </form>
@@ -300,7 +308,7 @@
                             </thead>
                             <tbody>
                                 @foreach($quarries as $quarry)
-                                <tr>
+                                <tr id="tableRowNo{{$quarry['id']}}">
                                     <input type="hidden" class="delete-id" value="{{$quarry['id']}}">
                                     <td class="cell">{{$quarry->control_number}}</td>
                                     <td class="cell">{{$quarry->name}}</td>
@@ -317,7 +325,7 @@
                                         <td class="cell">MABINI</td>
                                             @break
                                             
-                                        @case4)
+                                        @case(4)
                                         <td class="cell">MACO</td>
                                             @break
 
@@ -359,7 +367,7 @@
                                     
                                     <td class="cell">{{$quarry->date_applied}}</td>
                                     <td class="cell">{{$quarry->status}}</td>
-                                    <td class="cell"><button id="editForm" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit" data-quarry-info="{{$quarry}}">Edit</button>
+                                    <td class="cell"><button id="editForm" class="btn-sm app-btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit" data-quarry-info="{{$quarry->id}}">Edit</button>
                                         <button class="btn-sm app-btn-secondary deletebutton" id="{{$quarry['id']}}">Delete</button>
                                     </td>
                                 </tr>
@@ -386,9 +394,9 @@
 
                 <div class="modal-body">
 
-                    <form action="editQuarry" id="quarryEdit" method="POST">
+                    <form action="editQuarry" id="quarryEdit" method="PUT">
                         @csrf
-                        @method('PUT')
+                        <input type="hidden" name="updateId" />
                         <div class="row g-2">
                             <div class="col-6">
                                 <div class="card border-start-0 border-top-0 border-bottom-0 rounded-0 ">
@@ -404,7 +412,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="quarryTypes" name="quarryTypes" disabled>
+                                                    <select class="form-select" id="quarryTypes" name="quarryTypes" readonly=true>
                                                         <option value="CSAG">CSAG</option>
                                                         <option value="CE">CE</option>
                                                         <option value="ISAG">ISAG</option>
@@ -417,7 +425,7 @@
                                         <div class="row">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="controlNum" name="controlNum" placeholder="Control No." disabled>
+                                                    <input type="text" class="form-control" id="controlNum" name="controlNum" placeholder="Control No." readonly>
                                                     <label for="controlNum">Control Number</label>
                                                 </div>
                                             </div>
@@ -477,7 +485,7 @@
                                                 <div class="form-floating">
                                                     <select class="form-select" id="municipality" name="municipality">
                                                         @foreach($municipalities as $municipality)
-                                                        <option value="{{$municipality['id']}}" selected>{{$municipality->munname}}</option>
+                                                        <option value="{{$municipality['id']}}" >{{$municipality->munname}}</option>
                                                         @endforeach
                                                     </select>
                                                     <label for="municipality">Municipality</label>
@@ -574,7 +582,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" id="submit" class="btn btn-primary text-white">Save Changes</button>
+                    <button type="submit" id="submitUpdate" class="btn btn-primary text-white">Save Changes  <div class="spinner-border spinner-border-sm text-secondary ms-2" role="status" id="spinner-update" style="display:none;">
+                                <span class="visually-hidden">Loading...</span>
+                            </div> </button>
                 </div>
 
                 </form>
@@ -591,9 +601,27 @@
     @endsection
 
     @section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+         const toggleNextBtn = () => {
+        // for page ni
+        $("#quarryTab").removeClass("fade show active");
+        $("#subQuarryTab").addClass("fade show active");
+
+        //for tab button ni
+        $("button#quarry-tab").removeClass("fade show active");
+        $("button#sub-quarry-tab").addClass("fade show active");
+
+        //hide the button next
+        $("#next-page-tab").hide();
+        //show submit
+        $("#submitBtn").show();
+    }
+    
+    </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/assets/js/quarry.js"></script>
     <script src="/assets/js/quarry-delete-edit.js"></script>
     <script src="/assets/js/quarry-toast.js"></script>
     <script src="/assets/js/quarry-control-number.js"></script>

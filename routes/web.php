@@ -69,16 +69,17 @@ Route::middleware(['auth'])->group(function () {
 
     /**
      * Quarry Route
-     */
+    */
 
-    
+    Route::post('quarry', [QuarryController::class,'addData']);
+    Route::post('certainUser', [QuarryController::class,'selectUser']);
+    Route::get('quarry', [QuarryController::class,'dataList'])->name('quarry');
+    Route::post('lastid', [QuarryController::class,'lastID']);
+    Route::delete('delete/{id}', [QuarryController::class,'deleteData']);
+    Route::put('edit', [QuarryController::class,'updateData']);
+    Route::get('/search', [VehicleViolationsController::class,'search']);
+
+
 
 });
 
-// Route::get('quarry-index', [QuarryController::class, 'index'])->name('index.quarry');
-Route::post('quarry', [QuarryController::class,'addData']);
-Route::get('quarry', [QuarryController::class,'dataList'])->name('quarry');
-Route::post('lastid', [QuarryController::class,'lastID']);
-Route::delete('delete/{id}', [QuarryController::class,'deleteData']);
-Route::put('edit/{id}', [QuarryController::class,'updateData']);
-Route::get('/search', [VehicleViolationsController::class,'search']);

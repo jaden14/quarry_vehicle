@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class QuarryController extends Controller
 {
+    function selectUser(Request $req)
+    {
+        return response()->json(array('user_info' =>Quarry::find($req->id)), 200);
+    }
 
     function lastID(Request $req)
     {   
@@ -19,13 +23,13 @@ class QuarryController extends Controller
         $id = DB::select($var);
         $id = count($id) != 0  ? $id[0]->id : $req->type.'-000';
         $x = explode("-", $id);// [CSAG, 099]
-        $id = (int)$x[1];//99
+        $id = (int)$x[1]; //99
         return response()->json(array('last_insert_id' =>$id), 200);
-
     }
     
     function addData(Request $req)
     {
+
         $input = $req->only('requirement');
         $input['requirements'] = json_encode($input); //$req->input('requirement');
         $idFromSubQuarry = Subquarry::create($input)->id;
@@ -51,9 +55,9 @@ class QuarryController extends Controller
         $data->third_notice_date = $req->thirdNoticeDate;
         $data->remarks = $req->remarks;
         $data->save();
+      
         
-        $req->session()->flash('name', 'Data added successfully!');
-        return redirect('quarry');
+        return response()->json(array('last_inserted' =>$data), 200);
     }
 
     function dataList()
@@ -78,11 +82,12 @@ class QuarryController extends Controller
     }
 
 
-    function updateData(Request $req, $id)
+    function updateData(Request $req)
     {
 
-        $data = Quarry::find($req->id);
+        $data = Quarry::find($req->updateId);
         $data->quarry_type = $req->quarryTypes;
+        $data->control_number = $req->controlNum;
         $data->name = $req->name;
         $data->bus_name = $req->busName;
         $data->bus_address = $req->busAddress;
@@ -99,79 +104,8 @@ class QuarryController extends Controller
         $data->third_notice_date = $req->thirdNoticeDate;
         $data->remarks = $req->remarks;
         $data->save();
+        return response()->json(array('last_updated' =>$data), 200);
 
-        return redirect('quarry');
-    }
-
-    // SUBQUARRY
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('quarry');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        $input['requirements'] = $request->input('requirements');
-        Subquarry::create($input);
-        return redirect()->route('quarry');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        //return redirect('quarry');
     }
 }
