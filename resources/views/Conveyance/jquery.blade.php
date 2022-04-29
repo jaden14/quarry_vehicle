@@ -168,9 +168,10 @@
             var id = $(this).val(); // get ID
 
             Swal.fire({
-                title: 'Do you want to save the changes?',
+                title: 'Would you like to delete this record?',
                 showCancelButton: true,
-                confirmButtonText: 'Save',
+                confirmButtonColor: 'LightSeaGreen',
+                confirmButtonText: 'Delete',
                 }).then((result) => {
 
                 if (result.isConfirmed) {
