@@ -50,7 +50,15 @@ e.g
 ```php
 127.0.0.1:8000/quarry
 ```
+# CRUD: Vehicle Violations
 
+To access the **Vehicle Violations** page you may visit **/vehicleviolations** url path.
+
+e.g
+
+```php
+127.0.0.1:8000/vehicleviolations
+```
 
 # Reference: 
 
