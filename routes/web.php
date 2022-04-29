@@ -60,12 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-violationtype/{id}', [ViolationTypeController::class, 'edit']);
     Route::put('update-violationtype/{id}', [ViolationTypeController::class, 'update']);
     Route::delete('delete-violationtype/{id}', [ViolationTypeController::class, 'destroy']); // Not Working
-    /**
-     * Vehicle Violations Route
-     */
-    Route::resource('/vehicleviolations', VehicleViolationsController::class)->except([
-        'create', 'show'
-    ]);
+
 
     /**
      * Quarry Route
