@@ -13,22 +13,12 @@ $(document).ready(function () {
         const serializeArrayForm = $(
             "form[action=editQuarry]"
         ).serializeArray();
-        //another layer of SIMPLE validation
-        let dontProceed = false;
-        serializeArrayForm.some((data) => {
-            if (data.value.trim() === "") {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: `${data.name.toUpperCase()} field cannot be empty`,
-                });
-                $("#submitUpdate").prop("disabled", false);
-                $("#spinner-update").hide();
-                dontProceed = true;
-                return true;
-            }
-        });
-        if (dontProceed) return;
+
+        if (validateForm(serializeArrayForm)) {
+            $("#submitUpdate").prop("disabled", false);
+            $("#spinner-update").hide();
+            return;
+        }
 
         const selectedMunicipalityValue = serializeArrayForm[11].value;
         const selectedMunicipalityText = $(

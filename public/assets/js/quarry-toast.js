@@ -18,26 +18,13 @@ $(function () {
             },
         });
 
-        const serializeArrayForm = $(
-            "form[action=quarry]"
-        ).serializeArray();
+        const serializeArrayForm = $("form[action=quarry]").serializeArray();
 
-        let dontProceed = false;
-        serializeArrayForm.some((data) => {
-            if (data.value.trim() === "") {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: `${data.name.toUpperCase()} field cannot be empty`,
-                });
-                $("#submitUpdate").prop("disabled", false);
-                $("#spinner-update").hide();
-                dontProceed = true;
-                return true;
-            }
-        });
-        if (dontProceed) return;
-        
+        if (validateForm(serializeArrayForm)) {
+            $("#submitBtn").prop("disabled", false);
+            $("#spinner-submit").hide();
+            return;
+        }
 
         const selectedMunicipalityValue = serializeArrayForm[11].value;
         const selectedMunicipalityText = $(

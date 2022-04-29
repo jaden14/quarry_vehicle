@@ -605,20 +605,39 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-         const toggleNextBtn = () => {
-        // for page ni
-        $("#quarryTab").removeClass("fade show active");
-        $("#subQuarryTab").addClass("fade show active");
+        const toggleNextBtn = () => {
+            // for page ni
+            $("#quarryTab").removeClass("fade show active");
+            $("#subQuarryTab").addClass("fade show active");
 
-        //for tab button ni
-        $("button#quarry-tab").removeClass("fade show active");
-        $("button#sub-quarry-tab").addClass("fade show active");
+            //for tab button ni
+            $("button#quarry-tab").removeClass("fade show active");
+            $("button#sub-quarry-tab").addClass("fade show active");
 
-        //hide the button next
-        $("#next-page-tab").hide();
-        //show submit
-        $("#submitBtn").show();
-    }
+            //hide the button next
+            $("#next-page-tab").hide();
+            //show submit
+            $("#submitBtn").show();
+        }
+
+        //simple layer validation
+        const validateForm = (serializeArrayForm)=>{
+            let dontProceed = false;
+            
+            serializeArrayForm.some((data) => {
+                if (data.value.trim() === "") {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: `${data.name.toUpperCase()} field cannot be empty`,
+                    });
+        
+                    dontProceed = true;
+                    return true;
+                }
+            });
+            return dontProceed;
+        }
     
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
