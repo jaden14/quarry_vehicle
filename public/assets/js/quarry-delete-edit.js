@@ -10,9 +10,27 @@ $(document).ready(function () {
             },
         });
         const data = $("form[action=editQuarry]").serialize();
-        const selectedMunicipalityValue = $(
+        const serializeArrayForm = $(
             "form[action=editQuarry]"
-        ).serializeArray()[11].value;
+        ).serializeArray();
+        //another layer of SIMPLE validation
+        let dontProceed = false;
+        serializeArrayForm.some((data) => {
+            if (data.value.trim() === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${data.name.toUpperCase()} field cannot be empty`,
+                });
+                $("#submitUpdate").prop("disabled", false);
+                $("#spinner-update").hide();
+                dontProceed = true;
+                return true;
+            }
+        });
+        if (dontProceed) return;
+
+        const selectedMunicipalityValue = serializeArrayForm[11].value;
         const selectedMunicipalityText = $(
             `#municipality > option[value=${selectedMunicipalityValue}]`
         ).text();
@@ -39,7 +57,7 @@ $(document).ready(function () {
                 $("#submitUpdate").prop("disabled", false);
                 $("#spinner-update").hide();
 
-                $.notify("Data Updated successfully!", {
+                $.notify("Data updated successfully!", {
                     autoHideDelay: 2000,
                     showAnimation: "fadeIn",
                     hideAnimation: "fadeOut",

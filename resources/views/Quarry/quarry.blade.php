@@ -405,14 +405,14 @@
                                         <div class="row g-3 mb-3 align-items-center justify-content-between">
                                             <div class="col-md-6">
                                                 <div class="form-floating">
-                                                    <input id="dateApplied" class="form-control" type="date" name="dateApplied" />
+                                                    <input id="dateApplied" class="form-control" type="date" name="dateApplied" required/>
                                                     <label for="dateApplied">Date Applied</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-floating">
-                                                    <select class="form-select" id="quarryTypes" name="quarryTypes" readonly=true>
+                                                    <select class="form-select" id="quarryTypes" name="quarryTypes" readonly>
                                                         <option value="CSAG">CSAG</option>
                                                         <option value="CE">CE</option>
                                                         <option value="ISAG">ISAG</option>
@@ -434,7 +434,7 @@
                                         <div class="row">
                                             <div class="col-md">
                                                 <div class="form-floating mt-3">
-                                                    <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                                                    <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
                                                     <label for="name">Name</label>
                                                 </div>
                                             </div>
@@ -444,14 +444,14 @@
                                         <div class="row g-2 mt-2">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="busName" placeholder="Bus Name" name="busName">
+                                                    <input type="text" class="form-control" id="busName" placeholder="Bus Name" name="busName" required>
                                                     <label for="busName">Bus Name</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="busAddress" placeholder="Bus Address" name="busAddress">
+                                                    <input type="text" class="form-control" id="busAddress" placeholder="Bus Address" name="busAddress" required>
                                                     <label for="busAddress">Bus Address</label>
                                                 </div>
                                             </div>
@@ -460,14 +460,14 @@
                                         <div class="row g-2 mt-2">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="contactPerson" placeholder="Contact Person" name="contactPerson">
+                                                    <input type="text" class="form-control" id="contactPerson" placeholder="Contact Person" name="contactPerson" required>
                                                     <label for="contactPerson">Contact Person</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="contactNum" placeholder="Contact Number" name="contactNum">
+                                                    <input type="text" class="form-control" id="contactNum" placeholder="Contact Number" name="contactNum" required>
                                                     <label for="contactNum">Contact Number</label>
                                                 </div>
                                             </div>
@@ -476,7 +476,7 @@
                                         <div class="row g-2 mt-2">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="postalAddress" placeholder="Postal Address" name="postalAddress">
+                                                    <input type="text" class="form-control" id="postalAddress" placeholder="Postal Address" name="postalAddress" required>
                                                     <label for="postalAddress">Postal Address</label>
                                                 </div>
                                             </div>
@@ -516,14 +516,14 @@
                                         <div class="row g-2">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="firstNotice" placeholder="First Notice" name="firstNotice">
+                                                    <input type="text" class="form-control" id="firstNotice" placeholder="First Notice" name="firstNotice" required>
                                                     <label for="firstNotice">First Notice</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input id="firstNoticeDate" class="form-control" type="date" name="firstNoticeDate" />
+                                                    <input id="firstNoticeDate" class="form-control" type="date" name="firstNoticeDate" required/>
                                                     <label for="firstNoticeDate">Date</label>
                                                 </div>
                                             </div>
@@ -532,14 +532,14 @@
                                         <div class="row g-2 mt-0">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="secondNotice" placeholder="Second Notice" name="secondNotice">
+                                                    <input type="text" class="form-control" id="secondNotice" placeholder="Second Notice" name="secondNotice" required>
                                                     <label for="secondNotice">Second Notice</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input id="secondNoticeDate" class="form-control" type="date" name="secondNoticeDate" />
+                                                    <input id="secondNoticeDate" class="form-control" type="date" name="secondNoticeDate" required/>
                                                     <label for="secondNoticeDate">Date</label>
                                                 </div>
                                             </div>
@@ -548,21 +548,21 @@
                                         <div class="row g-2 mt-0">
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="thirdNotice" placeholder="Third Notice" name="thirdNotice">
+                                                    <input type="text" class="form-control" id="thirdNotice" placeholder="Third Notice" name="thirdNotice" required>
                                                     <label for="thirdNotice">Third Notice</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-md">
                                                 <div class="form-floating">
-                                                    <input id="thirdNoticeDate" class="form-control" type="date" name="thirdNoticeDate" />
+                                                    <input id="thirdNoticeDate" class="form-control" type="date" name="thirdNoticeDate" required />
                                                     <label for="thirdNoticeDate">Date</label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-floating mt-4">
-                                            <textarea class="form-control" placeholder="Remarks" id="remarks" style="height: 100px" name="remarks"></textarea>
+                                            <textarea class="form-control" placeholder="Remarks" id="remarks" style="height: 100px" name="remarks" required></textarea>
                                             <label for="remarks">Remarks</label>
                                         </div>
 

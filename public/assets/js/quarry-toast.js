@@ -17,9 +17,29 @@ $(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
-        const selectedMunicipalityValue = $(
+
+        const serializeArrayForm = $(
             "form[action=quarry]"
-        ).serializeArray()[11].value;
+        ).serializeArray();
+
+        let dontProceed = false;
+        serializeArrayForm.some((data) => {
+            if (data.value.trim() === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${data.name.toUpperCase()} field cannot be empty`,
+                });
+                $("#submitUpdate").prop("disabled", false);
+                $("#spinner-update").hide();
+                dontProceed = true;
+                return true;
+            }
+        });
+        if (dontProceed) return;
+        
+
+        const selectedMunicipalityValue = serializeArrayForm[11].value;
         const selectedMunicipalityText = $(
             `#municipality > option[value=${selectedMunicipalityValue}]`
         ).text();
