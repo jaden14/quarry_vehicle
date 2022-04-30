@@ -9,9 +9,30 @@ use App\Models\Conveyance;
 use App\Models\ViolationType;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Validator;
 
 class VehicleViolationsController extends Controller
 {
+
+    /**
+     * Show the vehicle violations table.
+     */
+    public function fetchVehicleViolation()
+    {
+
+        $violationtypes = ViolationType::all();
+        $conveyancetypes = Conveyance::all();
+        $vehicleviolations = VehicleViolations::all();
+        //$vehicleviolations = VehicleViolations::select('id', 'date', 'time','plate_no','responsible','conveyance_type','violation_type','remarks')->latest()->paginate(10);
+        
+        return response()->json([
+            'vehicleviolations'  => $vehicleviolations,
+            'violationtypes'  => $violationtypes,
+            'conveyancetypes' => $conveyancetypes,
+
+        ]);
+    }
+
     /**
      * Show the vehicle violations page.
      *
@@ -19,15 +40,13 @@ class VehicleViolationsController extends Controller
      */
     public function index()
     {
-        $violationtypes = ViolationType::select('id','description')->get(); //fetch from ViolationType Model
-        $conveyances = Conveyance::select('id','description')->get(); //fetch from Conveyance Model
-        $vehicleviolations = VehicleViolations::select('id', 'date', 'time','plate_no','responsible','conveyance_type','violation_type','remarks')->latest()->paginate(10);
-        return view('vehicleviolations.index', compact('vehicleviolations','conveyances','violationtypes'));
+        return view('vehicleviolations.index');
     }
     public function create()
     {
         //
     }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -36,9 +55,21 @@ class VehicleViolationsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'responsible' => ['required', 'max:255', 'string']
+        $validator = Validator::make($request->all(), [
+            'date' => 'required',
+            'time' => 'required',
+            'plate_no' => 'required',
+            'responsible' => 'required|max:50',
+            'remarks' => 'required',
         ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'    => 400,
+                'errors'    => $validator->messages(),
+            ]);
+        }
 
         VehicleViolations::create([
             'responsible' => $request->responsible,
@@ -50,10 +81,13 @@ class VehicleViolationsController extends Controller
             'remarks' =>  $request->remarks
         ]);
 
-        \Session::flash('success', $request->responsible . ' has been added successfully.');
+        return response()->json([
+            'status'    => 200,
+            'message'   => $request->responsible . ' has been added successfully',
+        ]);
 
-        return redirect()->route('vehicleviolations.index');
     }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -51,9 +51,6 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Violation Type Route
      */
-    // Route::resource('/violationtype', ViolationTypeController::class)->except([
-    //     'create', 'show'
-    // ]);
     Route::get('violationtype', [ViolationTypeController::class, 'index'])->name('violationtype');
     Route::get('fetch-violationtype', [ViolationTypeController::class, 'fetchviolationtypes']);
     Route::post('violationtype', [ViolationTypeController::class, 'store']);
@@ -61,6 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-violationtype/{id}', [ViolationTypeController::class, 'update']);
     Route::delete('delete-violationtype/{id}', [ViolationTypeController::class, 'destroy']); // Not Working
 
+    /**
+     * Vehicle Violations Route
+     */
+    Route::get('vehicleviolations', [VehicleViolationsController::class, 'index'])->name('vehicleviolations');
+    Route::get('fetch-vehicleviolation', [VehicleViolationsController::class, 'fetchvehicleviolation']); //DataTables, Select Option
+    Route::post('vehicleviolations', [VehicleViolationsController::class, 'store']);
 
     /**
      * Quarry Route
