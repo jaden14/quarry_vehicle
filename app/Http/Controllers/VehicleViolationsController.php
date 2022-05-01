@@ -49,9 +49,6 @@ class VehicleViolationsController extends Controller
     
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -89,42 +86,37 @@ class VehicleViolationsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Store a newly created resource in storage.
      */
-    public function destroy(VehicleViolations $vehicleviolation)
+
+    public function destroy($id)
     {
-        $vehicleviolation->delete();
-        return redirect()->route('vehicleviolations.index')->withSuccess('Deleted Successfully!');
+        $vehicleviolations = VehicleViolations::find($id);
+
+        // Check if id exist
+        if($vehicleviolations)
+        {
+            $vehicleviolations->delete();
+
+            return response()->json([
+                'status'    => 200,
+                'message'   => $vehicleviolations->responsible . ' has been deleted.',
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => "Record doesn't exist",
+            ]);
+        }
     }
+
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Conveyance  $conveyance
-     * @return \Illuminate\Http\Response
+     * Update vehicle violation
      */
     public function update(Request $request, VehicleViolations $vehicleviolation)
     {
-        $request->validate([
-            'responsible' => ['required', 'max:255', 'string']
-        ]);
-
-        $vehicleviolation->update([
-            'responsible' => $request->responsible,
-            'date' => $request->date,
-            'time' => $request->time,
-            'plate_no' => $request->plate_no,
-            'conveyance_type' => $request->conveyance_type,
-            'violation_type' => $request->violation_type,
-            'remarks' =>  $request->remarks
-        ]);
-
-        \Session::flash('success', $request->responsible . ' updated successfully.');
-
-        return redirect()->route('vehicleviolations.index');
+        
     }
     public function search()
     {

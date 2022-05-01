@@ -64,6 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vehicleviolations', [VehicleViolationsController::class, 'index'])->name('vehicleviolations');
     Route::get('fetch-vehicleviolation', [VehicleViolationsController::class, 'fetchvehicleviolation']); //DataTables, Select Option
     Route::post('vehicleviolations', [VehicleViolationsController::class, 'store']);
+    Route::delete('delete-vehicleviolation/{id}', [VehicleViolationsController::class, 'destroy']); // Not Working
 
     /**
      * Quarry Route

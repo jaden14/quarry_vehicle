@@ -2,6 +2,8 @@
 <script>
     $(document).ready(function () {
 
+
+
         fetchVehicleViolation();
 
         // Fetch Data
@@ -18,10 +20,23 @@
                     $('tbody').html("");
                     
                     // Add Dynamic Data
+
+                  
                     $.each(response.vehicleviolations, function (key, item) {
+
+
+                        //const d = new Date("2022");  
+                        var formattedDate  = new Date(item.date);
+                        var d = formattedDate.getDate();
+                        var m =  formattedDate.getMonth();
+                        m += 1;  // JavaScript months are 0-11
+                        var y = formattedDate.getFullYear();
+
+                        //$("#txtDate").val(d + "." + m + "." + y);
+
                         $('tbody').append('<tr>\
                                 <td class="cell">'+item.id+'</td>\
-                                <td class="cell"><span>'+item.date+'</span> <span class="note">'+item.time+'</span></td>\
+                                <td class="cell"><span class="date">'+m+ '-' +d+ '-' +y+'</span> <span class="note">'+item.time+'</span></td>\
                                 <td class="cell">'+item.plate_no+'</td>\
                                 <td class="cell">'+item.responsible+'</td>\
                                 <td class="cell">'+item.remarks+'</td>\
@@ -34,10 +49,20 @@
                     });
 
                     // Conveyance Type Data
-                    $.each(response.conveyancetypes, function (key, item) {
-                        //$('.conveyancetypes').append('<option value="'+item.description+'">'+item.description+'</option>');
-                        $('.conveyance_type').append($('<option></option>').attr('value', item.description).text(item.description));
-                    });
+                    var select = document.getElementById("conveyance_type");
+                    var options = response.conveyancetypes;
+                        for(var i = 0; i < options.length; i++) {
+                        var opt = options[i];
+                        var el = document.createElement("option");
+                        el.textContent = opt;
+                        el.value = opt;
+                        select.appendChild(el);
+                    }
+
+                    //$.each(response.conveyancetypes, function (key, item) {
+                        //$('.conveyance_type').append('<option value="'+item.description+'">'+item.description+'</option>');
+                        //$('.conveyance_type').append($('<option></option>').attr('value', item.description).text(item.description));
+                    //});
 
                     // Violation Type Data
                     $.each(response.violationtypes, function (key, item) {
@@ -48,7 +73,6 @@
 
             });
         }
-
 
         // Save Form Data
         $(document).on('click', '.create_vehicleviolation', function (e) {
@@ -106,6 +130,46 @@
             });
         });
 
+        // Delete data
+        $(document).on('click', '.delete_vehicleviolation', function (e) {
+            e.preventDefault();
+            var id = $(this).val(); // get ID
+
+            Swal.fire({
+                title: 'Are you sure you want to delete this?',
+                showCancelButton: true,
+                confirmButtonText: 'Delete',
+                }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "/delete-vehicleviolation/"+id,
+                        data: {
+                            '_method': 'delete'
+                        },
+                        success: function (response, textStatus, xhr) {
+                            console.log(response);
+                            if(response.status == 404)
+                            {
+                                swal('warning', 'Oops!', response.message);
+                            } else {
+
+                                swal('success', 'Success', response.message);
+
+                                fetchVehicleViolation();
+
+                            }
+                        }
+                    });
+                }
+            });
+
+        });
 
         function swal(icon, title, message)
         {

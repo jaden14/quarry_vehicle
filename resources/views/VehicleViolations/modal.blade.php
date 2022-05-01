@@ -36,13 +36,13 @@
                     <div class="row">
                     <div class="col-md-6">
                         <label for="Conveyance" class="col-form-label">Conveyance Type</label>
-                        <select class="form-select conveyance_type" name="conveyance_type" >
+                        <select class="form-select conveyance_type" name="conveyance_type" id="conveyance_type">
 
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label for="inputAddress2" class="col-form-label">Violation</label>
-                        <select class="form-select violation_type" name="violation_type">
+                        <select class="form-select violation_type" name="violation_type" id="violation_type">
 
                         </select>
                     </div>
