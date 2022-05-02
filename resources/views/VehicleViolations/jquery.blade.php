@@ -90,6 +90,7 @@
                         $('#view_vehicleviolations').find('span[id="plate_no"]').html('<label for="plate_no" class="col-form-label">Plate No:</label> <input type="text" class="form-control" value="'+response.violationtypes['plate_no']+'" readonly>');
                         $('#view_vehicleviolations').find('span[id="conveyance"]').html('<label for="conveyance" class="col-form-label">Conveyance:</label> <input type="text" class="form-control" value="'+response.violationtypes['conveyance_type']+'" readonly>');
                         $('#view_vehicleviolations').find('span[id="violation"]').html('<label for="violation" class="col-form-label">Violation:</label> <input type="text" class="form-control" value="'+response.violationtypes['violation_type']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="responsible"]').html('<label for="responsible" class="col-form-label">Responsible:</label> <input type="text" class="form-control" value="'+response.violationtypes['responsible']+'" readonly>');
                         $('#view_vehicleviolations').find('span[id="remarks"]').html('<label for="remarks" class="col-form-label">Remarks:</label> <input type="text" class="form-control" value="'+response.violationtypes['remarks']+'" readonly>');
                         $('#view_vehicleviolations').modal('show');
 
