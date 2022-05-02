@@ -2,11 +2,9 @@
 <script>
     $(document).ready(function () {
 
-
-
         fetchVehicleViolation();
 
-        // Fetch Data
+        // Fetch Data Table
         function fetchVehicleViolation()
         {
             $.ajax({
@@ -64,6 +62,49 @@
 
             });
         }
+
+        //View Data in Modal
+        $(document).on('click', '.view_vehicleviolation', function (e) {
+            e.preventDefault();
+            var id = $(this).val();
+
+            console.log(id);
+
+            $.ajax({
+                type: "get",
+                url: "/view-vehicleviolation/"+id,
+                success: function (response) {
+
+                    //const d = new Date("2022");  
+                    var formattedDate  = new Date(response.violationtypes['date']);
+                    var d = formattedDate.getDate();
+                    var m =  formattedDate.getMonth();
+                    m += 1;  // JavaScript months are 0-11
+                    var y = formattedDate.getFullYear();
+
+                    // Catch Error
+                    if(!!response.status) {
+                        //$('#view_vehicleviolations').find('span[id="date"]').html(response.data['date']);
+                        $('#view_vehicleviolations').find('span[id="date"]').html('<label for="date" class="col-form-label">Date:</label> <input type="text" class="form-control" value="'+m+ '-' +d+ '-' +y+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="time"]').html('<label for="time" class="col-form-label">Time:</label> <input type="text" class="form-control" value="'+response.violationtypes['time']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="plate_no"]').html('<label for="plate_no" class="col-form-label">Plate No:</label> <input type="text" class="form-control" value="'+response.violationtypes['plate_no']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="conveyance"]').html('<label for="conveyance" class="col-form-label">Conveyance:</label> <input type="text" class="form-control" value="'+response.violationtypes['conveyance_type']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="violation"]').html('<label for="violation" class="col-form-label">Violation:</label> <input type="text" class="form-control" value="'+response.violationtypes['violation_type']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="remarks"]').html('<label for="remarks" class="col-form-label">Remarks:</label> <input type="text" class="form-control" value="'+response.violationtypes['remarks']+'" readonly>');
+                        $('#view_vehicleviolations').modal('show');
+
+                    } else {
+
+                        // Remove modal
+                        $('#view_vehicleviolations').modal('hide');
+                        alert("An error occured while fetching single data")
+
+                    }
+
+                    
+                }
+            })
+        });
 
         // Save Form Data
         $(document).on('click', '.create_vehicleviolation', function (e) {

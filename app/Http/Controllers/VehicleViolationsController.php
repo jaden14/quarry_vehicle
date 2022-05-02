@@ -13,6 +13,27 @@ use Illuminate\Support\Facades\Validator;
 
 class VehicleViolationsController extends Controller
 {
+    /**
+     * Show the vehicle violations data.
+     */
+    public function view($id)
+    {
+        $vehicleviolations = VehicleViolations::find($id);
+
+        // Check if id exist
+        if($vehicleviolations)
+        {
+            return response()->json([
+                'status'    => 200,
+                'violationtypes'   => $vehicleviolations,
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => 'Not Found!',
+            ]);
+        }
+    }
 
     /**
      * Show the vehicle violations table.

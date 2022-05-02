@@ -61,7 +61,32 @@
             </div>
         </form>
     </div>
-    </div><!--//End Create Modal-->
+</div><!--//End Create Modal-->
+
+<!--View Modal -->
+<div class="modal fade" id="view_vehicleviolations" tabindex="-1" aria-labelledby="vehicleviolationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View - Vehicle Violations</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <span id="date"></span>
+                <span id="time"></span>
+                <span id="plate_no"></span>
+                <span id="responsible"></span>
+                <span id="conveyance"></span>
+                <span id="violation"></span>
+                <span id="remarks"></span>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn app-btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+    </div>
+</div><!--//End View Modal-->
 
 <!--Search Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="vehicleviolationsModalLabel" aria-hidden="true">

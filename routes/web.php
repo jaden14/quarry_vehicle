@@ -63,7 +63,8 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('vehicleviolations', [VehicleViolationsController::class, 'index'])->name('vehicleviolations');
     Route::get('fetch-vehicleviolation', [VehicleViolationsController::class, 'fetchvehicleviolation']); //DataTables, Select Option
-    Route::post('vehicleviolations', [VehicleViolationsController::class, 'store']);
+    Route::post('vehicleviolations', [VehicleViolationsController::class, 'store']); //Save Data
+    Route::get('view-vehicleviolation/{id}', [VehicleViolationsController::class, 'view']);
     Route::delete('delete-vehicleviolation/{id}', [VehicleViolationsController::class, 'destroy']); // Not Working
 
     /**
