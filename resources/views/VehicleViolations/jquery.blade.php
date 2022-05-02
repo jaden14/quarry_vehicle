@@ -19,9 +19,11 @@
                     // Clear the table first
                     $('tbody').html("");
                     
-                    // Add Dynamic Data
+                    // Clear Conveyance and Vehicle Violation Type 
+                    $('#conveyance_type').html("");
+                    $('#violation_type').html("");
 
-                  
+                    // Add Dynamic Data
                     $.each(response.vehicleviolations, function (key, item) {
 
 
@@ -32,11 +34,9 @@
                         m += 1;  // JavaScript months are 0-11
                         var y = formattedDate.getFullYear();
 
-                        //$("#txtDate").val(d + "." + m + "." + y);
-
                         $('tbody').append('<tr>\
                                 <td class="cell">'+item.id+'</td>\
-                                <td class="cell"><span class="date">'+m+ '-' +d+ '-' +y+'</span> <span class="note">'+item.time+'</span></td>\
+                                <td class="cell"><span>'+m+ '-' +d+ '-' +y+'</span> <span class="note">'+item.time+'</span></td>\
                                 <td class="cell">'+item.plate_no+'</td>\
                                 <td class="cell">'+item.responsible+'</td>\
                                 <td class="cell">'+item.remarks+'</td>\
@@ -48,21 +48,12 @@
                             </tr>');
                     });
 
+                    
                     // Conveyance Type Data
-                    var select = document.getElementById("conveyance_type");
-                    var options = response.conveyancetypes;
-                        for(var i = 0; i < options.length; i++) {
-                        var opt = options[i];
-                        var el = document.createElement("option");
-                        el.textContent = opt;
-                        el.value = opt;
-                        select.appendChild(el);
-                    }
-
-                    //$.each(response.conveyancetypes, function (key, item) {
-                        //$('.conveyance_type').append('<option value="'+item.description+'">'+item.description+'</option>');
+                    $.each(response.conveyancetypes, function (key, item) {
+                        $('.conveyance_type').append('<option value="'+item.description+'">'+item.description+'</option>');
                         //$('.conveyance_type').append($('<option></option>').attr('value', item.description).text(item.description));
-                    //});
+                    });
 
                     // Violation Type Data
                     $.each(response.violationtypes, function (key, item) {
@@ -83,7 +74,7 @@
                 'plate_no': $('.plateno').val(),
                 'responsible': $('.responsible').val(),
                 'conveyance_type': $('.conveyance_type').val(),
-                'violation_type': $('.conveyance_type').val(),
+                'violation_type': $('.violation_type').val(),
                 'remarks': $('.remarks').val(),  
             }
 
@@ -119,12 +110,14 @@
 
                         // Remove modal
                         $('#vehicleviolations').modal('hide');
+
                         // Remove modal input value
                         $('#vehicleviolations').find('input').val("");
 
                         fetchVehicleViolation(); //fetch record
 
                         swal('success', 'Success', response.message);
+                        
                     }
                 }
             });
