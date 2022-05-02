@@ -1,6 +1,7 @@
 @section('scripts')
 <script>
     $(document).ready(function () {
+        
 
         fetchVehicleViolation();
 
@@ -49,13 +50,13 @@
                     
                     // Conveyance Type Data
                     $.each(response.conveyancetypes, function (key, item) {
-                        $('.conveyance_type').append('<option value="'+item.description+'">'+item.description+'</option>');
+                        $('.conveyance_type').append('<option value="'+item.description+'" selected>'+item.description+'</option>');
                         //$('.conveyance_type').append($('<option></option>').attr('value', item.description).text(item.description));
                     });
 
                     // Violation Type Data
                     $.each(response.violationtypes, function (key, item) {
-                        $('.violation_type').append('<option value="'+item.description+'">'+item.description+'</option>');
+                        $('.violation_type').append('<option value="'+item.description+'" selected>'+item.description+'</option>');
                     });
                    
                 }
@@ -63,6 +64,55 @@
             });
         }
 
+        //Edit Vehicle Violations
+        $(document).on('click', '.edit_vehicleviolation', function (e) {
+            e.preventDefault();
+            var id = $(this).val();
+
+            console.log(id);
+
+            $.ajax({
+                type: "get",
+                url: "/edit-vehicleviolation/"+id,
+                success: function (response) {
+
+                    // Catch Error
+                    if(!!response.status) {
+                        
+                        // Clear Conveyance and Vehicle Violation Type 
+                        $('#edit_conveyance_type').html("");
+                        $('#edit_violation_type').html("");
+
+                        // Conveyance Type Data
+                        $.each(response.conveyancetypes, function (key, item) {
+                            //$('.conveyance_type').append($('<option selected></option>').attr('value', response.conveyancetypes.description).text(response.conveyancetypes.description));
+                            $('.conveyance_type').append('<option value="'+item.description+'" >'+item.description+'</option>');
+                        });
+                      
+                        $('input[id="edit_plateno"]').val(response.vehicleviolations.plate_no);
+                        $('input[id="edit_time"]').val(response.vehicleviolations.time);
+                        $('input[id="edit_date"]').val(response.vehicleviolations.date);
+                        $('input[id="edit_responsible"]').val(response.vehicleviolations.responsible);
+                        $('#edit_vehicleviolations').modal('show');
+
+                    } else {
+
+                        // Remove modal
+                        $('#edit_vehicleviolations').modal('hide');
+                        
+                        // Remove modal input value
+                        $('#edit_vehicleviolations').find('input').val("");
+
+                        alert("An error occured while fetching single data");
+
+                    }
+                }
+
+
+            })
+        });
+
+        
         //View Data in Modal
         $(document).on('click', '.view_vehicleviolation', function (e) {
             e.preventDefault();
@@ -76,7 +126,7 @@
                 success: function (response) {
 
                     //const d = new Date("2022");  
-                    var formattedDate  = new Date(response.violationtypes['date']);
+                    var formattedDate  = new Date(response.vehicleviolations['date']);
                     var d = formattedDate.getDate();
                     var m =  formattedDate.getMonth();
                     m += 1;  // JavaScript months are 0-11
@@ -86,23 +136,21 @@
                     if(!!response.status) {
                         //$('#view_vehicleviolations').find('span[id="date"]').html(response.data['date']);
                         $('#view_vehicleviolations').find('span[id="date"]').html('<label for="date" class="col-form-label">Date:</label> <input type="text" class="form-control" value="'+m+ '-' +d+ '-' +y+'" readonly>');
-                        $('#view_vehicleviolations').find('span[id="time"]').html('<label for="time" class="col-form-label">Time:</label> <input type="text" class="form-control" value="'+response.violationtypes['time']+'" readonly>');
-                        $('#view_vehicleviolations').find('span[id="plate_no"]').html('<label for="plate_no" class="col-form-label">Plate No:</label> <input type="text" class="form-control" value="'+response.violationtypes['plate_no']+'" readonly>');
-                        $('#view_vehicleviolations').find('span[id="conveyance"]').html('<label for="conveyance" class="col-form-label">Conveyance:</label> <input type="text" class="form-control" value="'+response.violationtypes['conveyance_type']+'" readonly>');
-                        $('#view_vehicleviolations').find('span[id="violation"]').html('<label for="violation" class="col-form-label">Violation:</label> <input type="text" class="form-control" value="'+response.violationtypes['violation_type']+'" readonly>');
-                        $('#view_vehicleviolations').find('span[id="responsible"]').html('<label for="responsible" class="col-form-label">Responsible:</label> <input type="text" class="form-control" value="'+response.violationtypes['responsible']+'" readonly>');
-                        $('#view_vehicleviolations').find('span[id="remarks"]').html('<label for="remarks" class="col-form-label">Remarks:</label> <input type="text" class="form-control" value="'+response.violationtypes['remarks']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="time"]').html('<label for="time" class="col-form-label">Time:</label> <input type="time" class="form-control" value="'+response.vehicleviolations['time']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="plate_no"]').html('<label for="plate_no" class="col-form-label">Plate No:</label> <input type="text" class="form-control" value="'+response.vehicleviolations['plate_no']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="conveyance"]').html('<label for="conveyance" class="col-form-label">Conveyance:</label> <input type="text" class="form-control" value="'+response.vehicleviolations['conveyance_type']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="violation"]').html('<label for="violation" class="col-form-label">Violation:</label> <input type="text" class="form-control" value="'+response.vehicleviolations['violation_type']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="responsible"]').html('<label for="responsible" class="col-form-label">Responsible:</label> <input type="text" class="form-control" value="'+response.vehicleviolations['responsible']+'" readonly>');
+                        $('#view_vehicleviolations').find('span[id="remarks"]').html('<label for="remarks" class="col-form-label">Remarks:</label> <input type="text" class="form-control" value="'+response.vehicleviolations['remarks']+'" readonly>');
                         $('#view_vehicleviolations').modal('show');
 
                     } else {
 
                         // Remove modal
                         $('#view_vehicleviolations').modal('hide');
-                        alert("An error occured while fetching single data")
+                        alert("An error occured while fetching single data");
 
                     }
-
-                    
                 }
             })
         });

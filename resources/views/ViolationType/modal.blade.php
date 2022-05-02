@@ -35,9 +35,7 @@
         <div class="modal-body">
 
             <ul id="updateform_errList">
-
             </ul>
-
             <div class="form-group mb-3 d-none">
                 <label for="">Record ID</label>
                 <input type="text" class="form-control name" id="edit_id">

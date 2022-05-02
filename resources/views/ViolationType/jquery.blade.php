@@ -32,6 +32,7 @@
             });
         }
 
+        //Edit Data Modal
         $(document).on('click', '.edit_violationtype', function (e) {
             e.preventDefault();
             var id = $(this).val();
@@ -62,6 +63,8 @@
             })
         });
 
+
+        //Update Data
         $(document).on('click', '.update_violationtype', function (e) {
             e.preventDefault(); // Prevent page load
 

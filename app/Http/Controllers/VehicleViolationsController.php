@@ -14,6 +14,33 @@ use Illuminate\Support\Facades\Validator;
 class VehicleViolationsController extends Controller
 {
     /**
+     * Show the modal for editing
+     */
+    public function edit($id)
+    {
+        $vehicleviolations = VehicleViolations::find($id);
+
+        $violationtypes = ViolationType::all();
+        $conveyancetypes = Conveyance::all();
+
+        // Check if id exist
+        if($vehicleviolations)
+        {
+            return response()->json([
+                'status'    => 200,
+                'vehicleviolations'   => $vehicleviolations,
+                'violationtypes'  => $violationtypes,
+                'conveyancetypes' => $conveyancetypes,
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => 'Not Found!',
+            ]);
+        }
+    }
+
+    /**
      * Show the vehicle violations data.
      */
     public function view($id)
@@ -25,7 +52,8 @@ class VehicleViolationsController extends Controller
         {
             return response()->json([
                 'status'    => 200,
-                'violationtypes'   => $vehicleviolations,
+                'vehicleviolations'   => $vehicleviolations,
+                
             ]);
         } else {
             return response()->json([
@@ -133,19 +161,46 @@ class VehicleViolationsController extends Controller
 
 
     /**
-     * Update vehicle violation
+     * Update the specified resource in storage.
+     *
      */
-    public function update(Request $request, VehicleViolations $vehicleviolation)
+    public function update(Request $request, $id)
     {
-        
-    }
-    public function search()
-    {
+        $validator = Validator::make($request->all(), [
+            'date' => 'required',
+            'time' => 'required',
+            'plate_no' => 'required',
+            'responsible' => 'required|max:50',
+            'remarks' => 'required',
+        ]);
 
-        $search_text_one = $_GET['plate_no'];
-        $search_text_two = $_GET['responsible'];
-        $vehicleviolations = VehicleViolations::where('plate_no','LIKE', '%'.$search_text_one.'%')->orWhere('responsible','LIKE', '%'.$search_text_two.'%',)->get();
-        return view('vehicleviolations.search', compact('vehicleviolations'));
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'    => 400,
+                'errors'    => $validator->messages(),
+            ]);
+        }
+
+        $vehicleviolations = VehicleViolations::find($id);
+
+        // Check if id exist
+        if($vehicleviolations)
+        {
+            $vehicleviolations->responsible = $request->input('responsible');
+            $vehicleviolations->update();
+
+            return response()->json([
+                'status'    => 200,
+                'message'    => $request->description . ' has been update successfully',
+            ]);
+
+        } else {
+            return response()->json([
+                'status'    => 404,
+                'message'   => "We can't find " . $request->description,
+            ]);
+        }
     }
 
 }

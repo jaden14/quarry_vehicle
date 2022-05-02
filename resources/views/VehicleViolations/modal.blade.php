@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-12"> 
                         <label for="responsible" class="col-form-label">Responsible</label>
-                        <input type="text" class="form-control responsible" id="responsible" name="responsible" placeholder="Responsible">
+                        <input type="text" class="form-control responsible" id="responsible" name="responsible" placeholder="Responsible" autofocus>
                     </div>
                     <div class="row">
                     <div class="col-md-6">
@@ -72,14 +72,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <span id="date"></span>
-                <span id="time"></span>
-                <span id="plate_no"></span>
-                <span id="responsible"></span>
-                <span id="conveyance"></span>
-                <span id="violation"></span>
-                <span id="remarks"></span>
-
+                <div class="form-row">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span id="date"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span id="time"></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span id="plate_no"></span>
+                        </div>
+                    </div>    
+                    <span id="responsible"></span>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span id="conveyance"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <span id="violation"></span>
+                        </div>
+                    </div>   
+                    <span id="remarks"></span>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn app-btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -87,6 +102,60 @@
             </div>
     </div>
 </div><!--//End View Modal-->
+
+<!--Edit Modal -->
+<div class="modal fade" id="edit_vehicleviolations" tabindex="-1" aria-labelledby="vehicleviolationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit - Vehicle Violations</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="edit_date" style="background-color:#A6FFC2">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="date">Time:</label>
+                            <input type="time" class="form-control" id="edit_time" style="background-color:#A6FFC2">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="date">Plate No.</label>
+                            <input type="text" class="form-control" id="edit_plateno" style="background-color:#A6FFC2">
+                        </div>
+                    </div>
+                    <div class="col-md-12"> 
+                        <label for="responsible" class="col-form-label">Responsible</label>
+                        <input type="text" class="form-control" id="edit_responsible" style="background-color:#A6FFC2">
+                    </div>    
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="Conveyance" class="col-form-label">Conveyance Type</label>
+                            <select class="form-select conveyance_type" name="conveyance_type" id="edit_conveyance_type" style="background-color:#A6FFC2">
+
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddress2" class="col-form-label">Violation</label>
+                            <select class="form-select violation_type" name="violation_type" id="edit_violation_type" style="background-color:#A6FFC2">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn app-btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+    </div>
+</div><!--//End Edit Modal-->
 
 <!--Search Modal -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="vehicleviolationsModalLabel" aria-hidden="true">
