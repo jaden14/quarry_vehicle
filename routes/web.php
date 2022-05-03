@@ -66,11 +66,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('vehicleviolations', [VehicleViolationsController::class, 'store']); //Save Modal
 
     Route::get('edit-vehicleviolation/{id}', [VehicleViolationsController::class, 'edit']); //Edit Modal
-    //Route::put('update-violationtype/{id}', [VehicleViolationsController::class, 'update']); //Update Data
+    Route::put('update-vehicleviolation/{id}', [VehicleViolationsController::class, 'update']); //Update Data
 
     Route::get('view-vehicleviolation/{id}', [VehicleViolationsController::class, 'view']); //View Modal
     Route::delete('delete-vehicleviolation/{id}', [VehicleViolationsController::class, 'destroy']); // Delete Modal
+    Route::get('/search', [VehicleViolationsController::class,'search']);
 
+    
     /**
      * Quarry Route
     */
@@ -81,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('lastid', [QuarryController::class,'lastID']);
     Route::delete('delete/{id}', [QuarryController::class,'deleteData']);
     Route::put('edit', [QuarryController::class,'updateData']);
-    Route::get('/search', [VehicleViolationsController::class,'search']);
+    
 
 
 

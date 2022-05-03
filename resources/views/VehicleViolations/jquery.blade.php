@@ -64,8 +64,74 @@
             });
         }
 
+
+        //Update Vehicle Violations
+        $(document).on('click', '.update_vehicleviolation', function (e) {
+            e.preventDefault(); // Prevent page load
+
+            $('.update_vehicleviolation').text('Updating');
+
+            var id = $('#edit_id').val();
+            var data = {
+                'date': $('#edit_date').val(),
+                'time': $('#edit_time').val(),
+                'plate_no': $('#edit_plateno').val(),
+                'responsible': $('#edit_responsible').val(),
+                'conveyance_type': $('.edit_conveyance_type').val(),
+                'violation_type': $('.edit_violation_type').val(),
+                'remarks': $('#edit_remarks').val(),
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "PUT",
+                url: "update-vehicleviolation/"+id,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+
+                    if(response.status == 400)
+                    {
+                        $('#updateform_errList').html("");
+                        $('#updateform_errList').addClass("alert alert-danger");
+
+                        $.each(response.errors, function (key, err_values) {
+                            $('#updateform_errList').append('<li>'+err_values+'</li>');
+                        })
+
+                        $('.update_vehicleviolation').text('Update');
+
+                    } else if(response.status == 404) {
+
+                        swal('warning', 'Oops!', response.message);
+
+                        $('.update_vehicleviolation').text('Update');
+
+                    } else {
+
+                        $('#updateform_errList').html("");
+
+                        $('#edit_vehicleviolations').modal('hide');
+
+                        $('.update_vehicleviolation').text('Update');
+
+                        fetchVehicleViolation();
+
+                        swal('success', 'Success', response.message);
+                    }
+                }
+            });
+
+            
+        });
+
         //Edit Vehicle Violations
         $(document).on('click', '.edit_vehicleviolation', function (e) {
+
             e.preventDefault();
             var id = $(this).val();
 
@@ -76,25 +142,20 @@
                 url: "/edit-vehicleviolation/"+id,
                 success: function (response) {
 
+                    // Clear Conveyance and Vehicle Violation Type 
+                    $('.edit_conveyance_type').html("");
+                    $('.edit_violation_type').html("");
+                    
                     // Catch Error
                     if(!!response.status) {
-                        
-                        // Clear Conveyance and Vehicle Violation Type 
-                        $('#edit_conveyance_type').html("");
-                        $('#edit_violation_type').html("");
-
-                        // Conveyance Type Data
-                        $.each(response.conveyancetypes, function (key, item) {
-                            //$('.conveyance_type').append($('<option selected></option>').attr('value', response.conveyancetypes.description).text(response.conveyancetypes.description));
-                            $('.conveyance_type').append('<option value="'+item.description+'" >'+item.description+'</option>');
-                        });
-                      
+                        $('input[id="edit_remarks"]').val(response.vehicleviolations.remarks);
                         $('input[id="edit_plateno"]').val(response.vehicleviolations.plate_no);
                         $('input[id="edit_time"]').val(response.vehicleviolations.time);
                         $('input[id="edit_date"]').val(response.vehicleviolations.date);
                         $('input[id="edit_responsible"]').val(response.vehicleviolations.responsible);
+                        $('input[id="edit_id"]').val(response.vehicleviolations.id);
                         $('#edit_vehicleviolations').modal('show');
-
+                        
                     } else {
 
                         // Remove modal
@@ -104,10 +165,18 @@
                         $('#edit_vehicleviolations').find('input').val("");
 
                         alert("An error occured while fetching single data");
-
                     }
-                }
 
+                    // Conveyance Select Option
+                    $.each(response.conveyancetype, function (key, item) {
+                        $('.edit_conveyance_type').append('<option value="'+item.description+'" >'+item.description+'</option>');
+                    });
+
+                    // Violation Select Option
+                    $.each(response.violationtype, function (key, item) {
+                        $('.edit_violation_type').append('<option value="'+item.description+'">'+item.description+'</option>');
+                    });
+                }
 
             })
         });
