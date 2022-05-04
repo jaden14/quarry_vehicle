@@ -167,6 +167,7 @@ class VehicleViolationsController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
+            'plate_no' => 'required',
             'responsible' => 'required|max:50',
             'remarks' => 'required',
         ]);
